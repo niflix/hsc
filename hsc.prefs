@@ -58,7 +58,6 @@
 <* some ENUMs *>
 <$varlist __Align ALIGN:enum("left|center|right|justify")>     <* general alignment *>
 <$varlist __IAlign ALIGN:enum("top|middle|bottom|left|right")> <* image alignment *>
-<$varlist __Shape SHAPE:enum("rect|circle|poly|default")>      <* for AREA etc. *>
 
 <* These are not needed (yet)
 <$define __elem-pureblock:string/CONST="address|blockquote|center|dir|div|dl|fieldset|form|h1|h2|h3|h4|h5|h6|hr|isindex|menu|noframes|noscript|ol|p|pre|table|ul">
@@ -406,10 +405,10 @@
 <* HTML *>
 
 <$deftag ! /SPECIAL>
-<$deftag A /CLOSE /NAW="a" /WHTSPC [__attrs] href:uri md:string CHARSET:string TYPE:string NAME:id HREFLANG:string [__Target] REL:string REV:string [__Shape] COORDS:string [__Focus]>
+<$deftag A /CLOSE /NAW="a" /WHTSPC [__attrs] href:uri md:string CHARSET:string TYPE:string NAME:id HREFLANG:string [__Target] REL:string REV:string COORDS:string [__Focus]>
 <$deftag ABBR /CLOSE /WHTSPC [__attrs]>
 <$deftag ADDRESS /CLOSE [__attrs]>
-<$deftag AREA /MBI="map" /EMPTY [__Shape] COORDS:string HREF:uri [__Target] NOHREF:bool ALT:string/R [__Focus]>
+<$deftag AREA /MBI="map" /EMPTY SHAPE:enum("rect|circle|poly|default") COORDS:string HREF:uri [__Target] NOHREF:bool ALT:string/R [__Focus]>
 <$deftag B /CLOSE /WHTSPC [__attrs]>
 <$deftag BASE /MBI="head" /EMPTY /ONLYONCE id:id href:uri [__Target]>
 <$deftag BDO [__attrs]>
