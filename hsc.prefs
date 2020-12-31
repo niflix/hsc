@@ -419,17 +419,17 @@
 <* HTML *>
 
 <$deftag ! /SPECIAL>
-<$deftag A /CLOSE /NAW="a" /LAZY="hm" /WHTSPC [__attrs] CHARSET:string TYPE:string NAME:id HREFLANG:string [__Target] REL:string REV:string [__Shape] COORDS:string [__Focus]>
+<$deftag A /CLOSE /NAW="a" /WHTSPC [__attrs] href:uri md:string CHARSET:string TYPE:string NAME:id HREFLANG:string [__Target] REL:string REV:string [__Shape] COORDS:string [__Focus]>
 <$deftag ABBR /CLOSE /WHTSPC [__attrs]>
 <$deftag ACRONYM /CLOSE /WHTSPC [__attrs]>
 <$deftag ADDRESS /CLOSE [__attrs]>
 <$deftag AREA /MBI="map" /EMPTY [__Shape] COORDS:string HREF:uri [__Target] NOHREF:bool ALT:string/R [__Focus]>
 <$deftag B /CLOSE /WHTSPC [__attrs]>
-<$deftag BASE /MBI="head" /EMPTY /ONLYONCE /LAZY='ih' [__Target]>
+<$deftag BASE /MBI="head" /EMPTY /ONLYONCE id:id href:uri [__Target]>
 <$deftag BDO [__attrs]>
 <$deftag BIG /CLOSE /NAW="pre" /WHTSPC [__attrs]>
 <$deftag BLOCKQUOTE /CLOSE /NAW=(__elem-inline) [__attrs] CITE:uri>
-<$deftag BR /LAZY='k' /EMPTY [__attrs]>
+<$deftag BR /EMPTY [__attrs] clear:enum("left|right|all|none")>
 <$deftag BUTTON /CLOSE /NAW="a|input|select|textarea|label|button|form|isindex|fieldset|iframe" [__attrs] NAME:id VALUE:string TYPE:enum("button|submit|reset") DISABLED:bool [__Focus]>
 <$deftag CAPTION /CLOSE /MBI="fig|table" [__attrs] ALIGN:enum("top|bottom|left|right")>
 <$deftag CITE /CLOSE /WHTSPC [__attrs]>
@@ -470,7 +470,7 @@
 <$deftag OPTGROUP /CLOSE /MBI="select" [__attrs] DISABLED:bool LABEL:string>
 <$deftag OPTION /AUTOCLOSE /MBI="select|optgroup" [__attrs] SELECTED:bool DISABLED:bool VALUE:string LABEL:string>
 <$deftag P /AUTOCLOSE /MBI=(__applet + "address|blockquote|body|button|center|del|dd|div|fieldset|form|iframe|ins|li|map|noframes|noscript|object|td|th") /NAW=(__elem-inline) [__attrs] NOWRAP:bool/O [__Align]>
-<$deftag PARAM /EMPTY /LAZY='i' /MBI=(__applet + "object") NAME:string VALUE:string VALUETYPE:enum("data|ref|object") TYPE:string>
+<$deftag PARAM /EMPTY /MBI=(__applet + "object") NAME:string VALUE:string VALUETYPE:enum("data|ref|object") id:id TYPE:string>
 <$deftag PRE /CLOSE /NAW=(__elem-inline) [__attrs] WIDTH:num>
 <$deftag Q /CLOSE /WHTSPC [__attrs] CITE:uri>
 <$deftag SAMP /CLOSE /WHTSPC [__attrs]>
@@ -534,13 +534,13 @@
 <* dubious/JERK tags or otherwise not found in HTML 4.01 *>
   <$deftag AU /CLOSE /WHTSPC [__attrs] >
   <$deftag BANNER /CLOSE [__attrs] >
-  <$deftag BASEFONT /JERK /EMPTY /LAZY='i' /NAW="pre" SIZE:enum("1|2|3|4|5|6|7") COLOR:color/O FACE:string>
+  <$deftag BASEFONT /JERK /EMPTY /NAW="pre" id:id SIZE:enum("1|2|3|4|5|6|7") COLOR:color/O FACE:string>
   <$deftag BGSOUND /JERK SRC:uri LOOP:string>
   <$deftag BLINK /CLOSE /JERK>
   <$deftag BQ /CLOSE [__attrs]  NOWRAP:bool>
   <$deftag CREDIT /CLOSE /MBI="bq|fig" [__attrs] >
   <$deftag EMBED /AUTOCLOSE /JERK SRC:uri HEIGHT:string WIDTH:string ATTRIBUTE_1:string ATTRIBUTE_2:string>
-  <$deftag FIG /CLOSE /LAZY="cikl" SRC:uri/x/z/r ALIGN:enum("left|right|center|justify|bleedleft|bleedright") NOFLOW:bool MD:string [__WidthHeight] UNITS:string IMAGEMAP:uri>
+  <$deftag FIG /CLOSE id:id class:string clear:enum("left|right|all|none") lang:string SRC:uri/x/z/r ALIGN:enum("left|right|center|justify|bleedleft|bleedright") NOFLOW:bool MD:string [__WidthHeight] UNITS:string IMAGEMAP:uri>
   <$deftag FN /CLOSE [__attrs] >
   <$deftag FONT /JERK /CLOSE /NAW="pre" [__attrs]  SIZE:enum("1|2|3|4|5|6|7|+1|+2|+3|+4|+5|+6|+7|-1|-2|-3|-4|-5|-6|-7") COLOR:color FACE:string>
   <$deftag LANG /CLOSE /WHTSPC [__attrs] >
@@ -548,10 +548,10 @@
   <$deftag NEXTID N:string>
   <$deftag NOEMBED /CLOSE /JERK>
   <$deftag NOBR /CLOSE /JERK>
-  <$deftag NOTE /CLOSE /LAZY="ciklms">
+  <$deftag NOTE /CLOSE id:id class:string clear:enum("left|right|all|none") lang:string md:string src:uri>
   <$deftag OVERLAY SRC:uri/x/z/r MD:string UNITS:string X:string Y:string  WIDTH:string/j HEIGHT:string/j IMAGEMAP:uri>
   <$deftag PERSON /CLOSE /WHTSPC [__attrs] >
-  <$deftag RANGE /LAZY="ci" FROM:uri UNTIL:uri>
+  <$deftag RANGE id:id class:string FROM:uri UNTIL:uri>
   <$deftag SPACER /JERK TYPE:enum("vertical|horizontal|block") SIZE:string [__WidthHeight] ALIGN:enum("top|bottom|middle|left|right|texttop|absmiddle|baseline|absbottom")>
   <$deftag WBR /JERK>
 </$if>
