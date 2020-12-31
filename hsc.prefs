@@ -100,7 +100,6 @@
                        BGCOLOR:color>
 <$varlist __Focus [__AccessKey] >
 <$varlist __Target TARGET:string>
-<$define __applet:string='applet|'>
 
 <* some HSC defaults *>
 <$define HSC.CLICK-HERE:string/c="click|here|klicken">
@@ -449,8 +448,8 @@
 <$deftag OBJECT /CLOSE /NAW="pre" [__attrs] DECLARE:bool CLASSID:uri CODEBASE:uri DATA:uri TYPE:string CODETYPE:string ARCHIVE:string STANDBY:string HEIGHT:string WIDTH:string USEMAP:uri NAME:string [__IAlign] BORDER:num HSPACE:num VSPACE:num>
 <$deftag OPTGROUP /CLOSE /MBI="select" [__attrs] DISABLED:bool LABEL:string>
 <$deftag OPTION /AUTOCLOSE /MBI="select|optgroup" [__attrs] SELECTED:bool DISABLED:bool VALUE:string LABEL:string>
-<$deftag P /AUTOCLOSE /MBI=(__applet + "address|blockquote|body|button|center|del|dd|div|fieldset|form|iframe|ins|li|map|noframes|noscript|object|td|th") /NAW=(__elem-inline) [__attrs] NOWRAP:bool/O [__Align]>
-<$deftag PARAM /EMPTY /MBI=(__applet + "object") NAME:string VALUE:string VALUETYPE:enum("data|ref|object") id:id TYPE:string>
+<$deftag P /AUTOCLOSE /MBI=("address|blockquote|body|button|center|del|dd|div|fieldset|form|iframe|ins|li|map|noframes|noscript|object|td|th") /NAW=(__elem-inline) [__attrs] NOWRAP:bool/O [__Align]>
+<$deftag PARAM /EMPTY /MBI=("object") NAME:string VALUE:string VALUETYPE:enum("data|ref|object") id:id TYPE:string>
 <$deftag PRE /CLOSE /NAW=(__elem-inline) [__attrs] WIDTH:num>
 <$deftag Q /CLOSE /WHTSPC [__attrs] CITE:uri>
 <$deftag SAMP /CLOSE /WHTSPC [__attrs]>
