@@ -10,12 +10,50 @@
 **
 *>
 
-<* Some definitions for later use in tag declaration; they roughly
- * correspond to the entities by the same name in the HTML4.01/strict DTD
+<* Specs from https://html.spec.whatwg.org/ on 20201217 *>
+
+<*
+ * 3.2.6 Global Attributes
+ *   - missing item*
+ *   - missing is
+ *   - missing slot
+ *   - missing role and aria-*
  *>
-<$varlist __coreattrs /LAZY='icyt'>                <* HTML4 %coreattrs *>
-<$varlist __i18n /LAZY='ld'>                       <* HTML4 %i18n attrs *>
-<$varlist __attrs /LAZY='v' [__coreattrs] [__i18n]><* HTML4 %attrs *>
+
+<$varlist __events onabort:string onauxclick:string onblur:string oncancel:string oncanplay:string oncanplaythrough:string
+                   onchange:string onclick:string onclose:string oncontextmenu:string oncopy:string oncuechange:string
+		   oncut:string ondblclick:string ondrag:string ondragend:string ondragenter:string ondragleave:string
+		   ondragover:string ondragstart:string ondrop:string ondurationchange:string onemptied:string onended:string
+		   onerror:string onfocus:string onformdata:string oninput:string oninvalid:string onkeydown:string
+		   onkeypress:string onkeyup:string onload:string onloadeddata:string onloadedmetadata:string onloadstart:string
+		   onmousedown:string onmouseenter:string onmouseleave:string onmousemove:string onmouseout:string
+		   onmouseover:string onmouseup:string onpaste:string onpause:string onplay:string onplaying:string
+		   onprogress:string onratechange:string onreset:string onresize:string onscroll:string
+		   onsecuritypolicyviolation:string onseeked:string onseeking:string onselect:string onslotchange:string
+		   onstalled:string onsubmit:string onsuspend:string ontimeupdate:string ontoggle:string onvolumechange:string
+		   onwaiting:string onwheel:string>
+
+<$varlist __global accesskey:string
+	  	   autocapitalize:enum("characters|none|off|on|sentences|words")
+		   autofocus:bool
+		   contenteditable:enum("|true|false")
+		   dir:enum("auto|ltr|rtl")
+		   draggable:enum("auto|true|false")
+		   enterkeyhint:enum("enter|done|go|next|previous|search|send")
+		   hidden:bool
+		   inputmode:enum("none|text|tel|url|email|numeric|decimal|search")
+		   lang:string
+		   nonce:string
+		   spellcheck:enum("|true|false")
+		   style:string
+		   tabindex:num
+		   title:string
+		   translate:enum("|yes|no")
+		   class:string
+		   id:id
+		   [__events]>
+
+<$varlist __attrs  [__global] [__events]>
 
 <* some ENUMs *>
 <$varlist __Align ALIGN:enum("left|center|right|justify")>     <* general alignment *>
@@ -388,10 +426,10 @@
 <$deftag AREA /MBI="map" /EMPTY [__Shape] COORDS:string HREF:uri [__Target] NOHREF:bool ALT:string/R [__Focus]>
 <$deftag B /CLOSE /WHTSPC [__attrs]>
 <$deftag BASE /MBI="head" /EMPTY /ONLYONCE /LAZY='ih' [__Target]>
-<$deftag BDO [__coreattrs] LANG:string/RCMD DIR:enum("ltr|rtl")>
+<$deftag BDO [__attrs]>
 <$deftag BIG /CLOSE /NAW="pre" /WHTSPC [__attrs]>
 <$deftag BLOCKQUOTE /CLOSE /NAW=(__elem-inline) [__attrs] CITE:uri>
-<$deftag BR /LAZY='k' /EMPTY [__coreattrs]>
+<$deftag BR /LAZY='k' /EMPTY [__attrs]>
 <$deftag BUTTON /CLOSE /NAW="a|input|select|textarea|label|button|form|isindex|fieldset|iframe" [__attrs] NAME:id VALUE:string TYPE:enum("button|submit|reset") DISABLED:bool [__Focus]>
 <$deftag CAPTION /CLOSE /MBI="fig|table" [__attrs] ALIGN:enum("top|bottom|left|right")>
 <$deftag CITE /CLOSE /WHTSPC [__attrs]>
@@ -405,9 +443,9 @@
 <$deftag DT /AUTOCLOSE /MBI="dl" [__attrs]>
 <$deftag EM /CLOSE /WHTSPC [__attrs]>
 <$deftag FIELDSET /CLOSE [__attrs]>
-<$deftag FORM /CLOSE /NAW=(__elem-inline + "|form") [__attrs] ACTION:uri/R METHOD:enum("get|post") ENCTYPE:string ACCEPT:string NAME:string onSubmit:string onReset:string [__Target] ACCEPT-CHARSET:string SCRIPT:string/O>
-<$deftag FRAME /EMPTY /MBI="frameset" [__coreattrs] LONGDESC:uri NAME:string SRC:uri FRAMEBORDER:enum("1|0") MARGINWIDTH:num MARGINHEIGHT:num NORESIZE:bool SCROLLING:enum("yes|no|auto")>
-<$deftag FRAMESET /CLOSE [__coreattrs] ROWS:string COLS:string BORDER:string/J FRAMEBORDER:num/J FRAMESPACING:num/J onLoad:string onUnload:string>
+<$deftag FORM /CLOSE /NAW=(__elem-inline + "|form") [__attrs] ACTION:uri/R METHOD:enum("get|post") ENCTYPE:string ACCEPT:string NAME:string [__Target] ACCEPT-CHARSET:string SCRIPT:string/O>
+<$deftag FRAME /EMPTY /MBI="frameset" [__attrs] LONGDESC:uri NAME:string SRC:uri FRAMEBORDER:enum("1|0") MARGINWIDTH:num MARGINHEIGHT:num NORESIZE:bool SCROLLING:enum("yes|no|auto")>
+<$deftag FRAMESET /CLOSE [__attrs] ROWS:string COLS:string BORDER:string/J FRAMEBORDER:num/J FRAMESPACING:num/J>
 <$deftag H1 /CLOSE /NAW=(__elem-inline + "|h1|h2|h3|h4|h5|h6") /WHTSPC [__attrs] [__HeadingAttrs]>
 <$deftag H2 /CLOSE /NAW=(__elem-inline + "|h1|h2|h3|h4|h5|h6") /WHTSPC [__attrs] [__HeadingAttrs]>
 <$deftag H3 /CLOSE /NAW=(__elem-inline + "|h1|h2|h3|h4|h5|h6") /WHTSPC [__attrs] [__HeadingAttrs]>
@@ -416,8 +454,8 @@
 <$deftag H6 /CLOSE /NAW=(__elem-inline + "|h1|h2|h3|h4|h5|h6") /WHTSPC [__attrs] [__HeadingAttrs]>
 <$deftag HR /EMPTY [__attrs] SRC:uri/Z/O SIZE:string WIDTH:string ALIGN:enum("left|right|center") NOSHADE:bool>
 <$deftag I /CLOSE /WHTSPC [__attrs]>
-<$deftag IFRAME /NAW="button" [__coreattrs] LONGDESC:uri NAME:string SRC:uri FRAMEBORDER:enum("1|0") MARGINWIDTH:num MARGINHEIGHT:num SCROLLING:enum("yes|no|auto") [__IAlign] HEIGHT:string WIDTH:string>
-<$deftag INPUT /EMPTY /NAW="button" [__attrs] TYPE:enum("text|password|checkbox|radio|submit|reset|file|hidden|image|button") NAME:string VALUE:string CHECKED:bool DISABLED:bool READONLY:bool SIZE:string MAXLENGTH:num SRC:uri [__Alt] USEMAP:uri ISMAP:bool TABINDEX:num [__Focus] onSelect:string onChange:string ACCEPT:string [__IAlign]>
+<$deftag IFRAME /NAW="button" [__attrs] LONGDESC:uri NAME:string SRC:uri FRAMEBORDER:enum("1|0") MARGINWIDTH:num MARGINHEIGHT:num SCROLLING:enum("yes|no|auto") [__IAlign] HEIGHT:string WIDTH:string>
+<$deftag INPUT /EMPTY /NAW="button" [__attrs] TYPE:enum("text|password|checkbox|radio|submit|reset|file|hidden|image|button") NAME:string VALUE:string CHECKED:bool DISABLED:bool READONLY:bool SIZE:string MAXLENGTH:num SRC:uri [__Alt] USEMAP:uri ISMAP:bool [__Focus] ACCEPT:string [__IAlign]>
 <$deftag INS /CLOSE /WHTSPC [__attrs] CITE:uri DATETIME:string>
 <$deftag KBD /CLOSE /WHTSPC [__attrs]>
 <$deftag LABEL /CLOSE /NAW="button" [__attrs] FOR:string [__AccessKey] [__OnFocusOnBlur]>
@@ -425,10 +463,10 @@
 <$deftag LI /AUTOCLOSE /MBI="ul|ol|dir|menu" [__attrs] VALUE:string SKIP:string/O DINGBAT:string/O TYPE:string/J>
 <$deftag LINK /EMPTY /MBI="head" [__attrs] CHARSET:string HREF:uri/x HREFLANG:string TYPE:string REL:string REV:string MEDIA:string URN:string/JERK METHODS:string/JERK>
 <$deftag MAP /CLOSE [__attrs] NAME:id>
-<$deftag META /EMPTY /MBI="head" [__i18n] HTTP-EQUIV:string NAME:string CONTENT:string/R SCHEME:string>
+<$deftag META /EMPTY /MBI="head"  HTTP-EQUIV:string NAME:string CONTENT:string/R SCHEME:string>
 <$deftag NOFRAMES /MBI=(__applet + "blockquote|body|button|center|dd|del|div|fieldset|form|frameset|iframe|ins|li|map|noscript|object|td|th") /CLOSE [__attrs]>
 <$deftag NOSCRIPT /CLOSE /NAW=(__elem-inline) [__attrs]>
-<$deftag OBJECT /CLOSE /NAW="pre" [__attrs] DECLARE:bool CLASSID:uri CODEBASE:uri DATA:uri TYPE:string CODETYPE:string ARCHIVE:string STANDBY:string HEIGHT:string WIDTH:string USEMAP:uri NAME:string TABINDEX:num [__IAlign] BORDER:num HSPACE:num VSPACE:num>
+<$deftag OBJECT /CLOSE /NAW="pre" [__attrs] DECLARE:bool CLASSID:uri CODEBASE:uri DATA:uri TYPE:string CODETYPE:string ARCHIVE:string STANDBY:string HEIGHT:string WIDTH:string USEMAP:uri NAME:string [__IAlign] BORDER:num HSPACE:num VSPACE:num>
 <$deftag OPTGROUP /CLOSE /MBI="select" [__attrs] DISABLED:bool LABEL:string>
 <$deftag OPTION /AUTOCLOSE /MBI="select|optgroup" [__attrs] SELECTED:bool DISABLED:bool VALUE:string LABEL:string>
 <$deftag P /AUTOCLOSE /MBI=(__applet + "address|blockquote|body|button|center|del|dd|div|fieldset|form|iframe|ins|li|map|noframes|noscript|object|td|th") /NAW=(__elem-inline) [__attrs] NOWRAP:bool/O [__Align]>
@@ -437,16 +475,16 @@
 <$deftag Q /CLOSE /WHTSPC [__attrs] CITE:uri>
 <$deftag SAMP /CLOSE /WHTSPC [__attrs]>
 <$deftag SCRIPT /CLOSE /NAW="select|script" CHARSET:string TYPE:string/R LANGUAGE:string/O SRC:uri DEFER:bool EVENT:string FOR:uri>
-<$deftag SELECT /CLOSE /MBI="form" /NAW="button" [__attrs] NAME:string/r SIZE:num MULTIPLE:bool ROWS:string/O COLS:string/O DISABLED:bool ERROR:string/O WIDTH:string/O HEIGHT:string/O UNITS:string/O TABINDEX:num [__OnFocusOnBlur] onChange:string>
+<$deftag SELECT /CLOSE /MBI="form" /NAW="button" [__attrs] NAME:string/r SIZE:num MULTIPLE:bool ROWS:string/O COLS:string/O DISABLED:bool ERROR:string/O WIDTH:string/O HEIGHT:string/O UNITS:string/O [__OnFocusOnBlur]>
 <$deftag SMALL /CLOSE /NAW="pre" /WHTSPC [__attrs]>
 <$deftag SPAN /CLOSE [__attrs]>
 <$deftag STRONG /CLOSE /WHTSPC [__attrs]>
-<$deftag STYLE /CLOSE /MBI="head" [__i18n] TYPE:string/R MEDIA:string TITLE:string>
+<$deftag STYLE /CLOSE /MBI="head"  TYPE:string/R MEDIA:string TITLE:string>
 <$deftag SUB /CLOSE /NAW="pre" /WHTSPC [__attrs]>
 <$deftag SUP /CLOSE /NAW="pre" /WHTSPC [__attrs]>
 <$deftag TBODY /AUTOCLOSE /MBI="table" /NAW=(__elem-inline) [__attrs] [__HVAlign]>
 <$deftag TD /CLOSE /MBI="tr" /NAW=(__elem-inline) [__attrs] ABBR:string AXIS:string HEADERS:string SCOPE:enum("row|col|rowgroup|colgroup") ROWSPAN:string COLSPAN:string [__HVAlign] NOWRAP:bool NOFLOW:bool/O [__Background] [__WidthHeight]>
-<$deftag TEXTAREA /MBI="form" /CLOSE [__attrs] NAME:string ROWS:num/R COLS:num/R DISABLED:bool READONLY:bool [__Focus] onSelect:string onChange:string WRAP:enum("off|soft|hard")/O>
+<$deftag TEXTAREA /MBI="form" /CLOSE [__attrs] NAME:string ROWS:num/R COLS:num/R DISABLED:bool READONLY:bool [__Focus] WRAP:enum("off|soft|hard")/O>
 <$deftag TFOOT /AUTOCLOSE /MBI="table" /NAW=(__elem-inline) [__attrs] [__HVAlign]>
 <$deftag TH /CLOSE /MBI="tr" /NAW=(__elem-inline) [__attrs] [__Abbr] AXIS:string HEADERS:string SCOPE:enum("row|col|rowgroup|colgroup") ROWSPAN:string COLSPAN:string [__HVAlign] NOWRAP:bool NOFLOW:bool/O [__Background] [__WidthHeight]>
 <$deftag THEAD /AUTOCLOSE /MBI="table" /NAW=(__elem-inline) [__attrs] [__HVAlign]>
@@ -458,18 +496,18 @@
 <$if COND=(defined HSC.OPTS.XHTML)>
   <$deftag BODY /CLOSE /REQUIRED /ONLYONCE /MBI="html" [__attrs] BACKGROUND:uri [__BodyColors] onLoad:string onUnload:string>
   <$deftag COLGROUP /CLOSE /MBI="table" [__attrs] [__ColumnAttrs]>
-  <$deftag HEAD /CLOSE /REQUIRED /ONLYONCE /MBI="html" [__i18n] PROFILE:uri>
-  <$deftag HTML /CLOSE /REQUIRED /ONLYONCE [__i18n] XMLNS:uri>
+  <$deftag HEAD /CLOSE /REQUIRED /ONLYONCE /MBI="html"  PROFILE:uri>
+  <$deftag HTML /CLOSE /REQUIRED /ONLYONCE  XMLNS:uri>
   <$deftag IMG /EMPTY /NAW="pre" [__attrs] SRC:uri/X/Z/R ALT:string/R LONGDESC:uri NAME:string HEIGHT:string/O WIDTH:string/O USEMAP:uri ISMAP:bool/J [__IAlign] BORDER:num/O HSPACE:string/O VSPACE:string/O LOWSRC:uri/J>
   <$deftag OL /CLOSE /NAW=(__elem-inline) [__attrs]>
   <$deftag TABLE /CLOSE [__attrs] [__Summary] WIDTH:string BORDER:num ALIGN:enum("left|center|right")/O [__TFrameRules] CELLSPACING:string CELLPADDING:string [__Background]>
   <$deftag TITLE /CLOSE /REQUIRED /ONLYONCE /MBI="head" /WHTSPC [__attrs]>
   <$deftag UL /CLOSE /NAW=(__elem-inline) [__attrs]>
 <$else>
-  <$deftag BODY /AUTOCLOSE /RECOMMENDED /ONLYONCE [__attrs] BACKGROUND:uri [__BodyColors] onLoad:string onUnload:string>
+  <$deftag BODY /AUTOCLOSE /RECOMMENDED /ONLYONCE [__attrs] BACKGROUND:uri [__BodyColors]>
   <$deftag COLGROUP /AUTOCLOSE /MBI="table" [__attrs] [__ColumnAttrs]>
-  <$deftag HEAD /CLOSE /RECOMMENDED /ONLYONCE [__i18n] PROFILE:uri>
-  <$deftag HTML /CLOSE /RECOMMENDED /ONLYONCE [__i18n]>
+  <$deftag HEAD /CLOSE /RECOMMENDED /ONLYONCE  PROFILE:uri>
+  <$deftag HTML /CLOSE /RECOMMENDED /ONLYONCE [__attrs] >
   <$deftag IMG /EMPTY /NAW="pre" [__attrs] SRC:uri/X/Z/R ALT:string/R LONGDESC:uri NAME:string HEIGHT:string WIDTH:string USEMAP:uri ISMAP:bool/J [__IAlign] BORDER:num HSPACE:string VSPACE:string LOWSRC:uri/J>
   <$deftag OL /CLOSE /NAW=(__elem-inline) [__attrs] TYPE:enum("1|a|i") COMPACT:bool START:num>
   <$deftag TABLE /CLOSE [__attrs] [__Summary] WIDTH:string BORDER:num ALIGN:enum("left|center|right")/O [__TFrameRules] CELLSPACING:string CELLPADDING:string [__Background] UNITS:string/O NOWRAP:bool/J NOFLOW:bool/J>
@@ -477,14 +515,14 @@
   <$deftag UL /CLOSE /NAW=(__elem-inline) [__attrs] TYPE:enum("disc|square|circle") COMPACT:bool DINGBAT:string/O WRAP:string/O PLAIN:bool/O>
 
   <* OBSOLETE tags as of HTML 4.01 *>
-  <$deftag APPLET /CLOSE /NAW="pre" /OBSOLETE [__coreattrs] CODEBASE:uri ARCHIVE:string CODE:string OBJECT:string [__Alt] NAME:id [__WidthHeight] HSPACE:num VSPACE:num [__IAlign]>
+  <$deftag APPLET /CLOSE /NAW="pre" /OBSOLETE [__attrs] CODEBASE:uri ARCHIVE:string CODE:string OBJECT:string [__Alt] NAME:id [__WidthHeight] HSPACE:num VSPACE:num [__IAlign]>
   <$deftag CENTER /CLOSE /OBSOLETE [__attrs]>
   <$deftag HP0 /CLOSE /OBSOLETE /WHTSPC> <* highlight phrase *>
   <$deftag HP1 /CLOSE /OBSOLETE /WHTSPC>
   <$deftag HP2 /CLOSE /OBSOLETE /WHTSPC>
   <$deftag HP3 /CLOSE /OBSOLETE /WHTSPC>
-  <$deftag ISINDEX /EMPTY /OBSOLETE [__coreattrs] [__i18n] PROMPT:string>
-  <$deftag LH /CLOSE /OBSOLETE [__coreattrs] [__i18n]>
+  <$deftag ISINDEX /EMPTY /OBSOLETE [__attrs]  PROMPT:string>
+  <$deftag LH /CLOSE /OBSOLETE [__attrs] >
   <$deftag LISTING /CLOSE /OBSOLETE>
   <$deftag MENU /CLOSE /OBSOLETE [__attrs] COMPACT:bool>
   <$deftag PLAINTEXT /CLOSE /OBSOLETE>
@@ -494,25 +532,25 @@
   <$deftag XMP /CLOSE /OBSOLETE><$deftag DIR /CLOSE /OBSOLETE COMPACT:bool [__attrs]>
 
 <* dubious/JERK tags or otherwise not found in HTML 4.01 *>
-  <$deftag AU /CLOSE /WHTSPC [__coreattrs] [__i18n]>
-  <$deftag BANNER /CLOSE [__coreattrs] [__i18n]>
+  <$deftag AU /CLOSE /WHTSPC [__attrs] >
+  <$deftag BANNER /CLOSE [__attrs] >
   <$deftag BASEFONT /JERK /EMPTY /LAZY='i' /NAW="pre" SIZE:enum("1|2|3|4|5|6|7") COLOR:color/O FACE:string>
   <$deftag BGSOUND /JERK SRC:uri LOOP:string>
   <$deftag BLINK /CLOSE /JERK>
-  <$deftag BQ /CLOSE [__coreattrs] [__i18n] NOWRAP:bool>
-  <$deftag CREDIT /CLOSE /MBI="bq|fig" [__coreattrs] [__i18n]>
+  <$deftag BQ /CLOSE [__attrs]  NOWRAP:bool>
+  <$deftag CREDIT /CLOSE /MBI="bq|fig" [__attrs] >
   <$deftag EMBED /AUTOCLOSE /JERK SRC:uri HEIGHT:string WIDTH:string ATTRIBUTE_1:string ATTRIBUTE_2:string>
   <$deftag FIG /CLOSE /LAZY="cikl" SRC:uri/x/z/r ALIGN:enum("left|right|center|justify|bleedleft|bleedright") NOFLOW:bool MD:string [__WidthHeight] UNITS:string IMAGEMAP:uri>
-  <$deftag FN /CLOSE [__coreattrs] [__i18n]>
-  <$deftag FONT /JERK /CLOSE /NAW="pre" [__coreattrs] [__i18n] SIZE:enum("1|2|3|4|5|6|7|+1|+2|+3|+4|+5|+6|+7|-1|-2|-3|-4|-5|-6|-7") COLOR:color FACE:string>
-  <$deftag LANG /CLOSE /WHTSPC [__coreattrs] [__i18n]>
+  <$deftag FN /CLOSE [__attrs] >
+  <$deftag FONT /JERK /CLOSE /NAW="pre" [__attrs]  SIZE:enum("1|2|3|4|5|6|7|+1|+2|+3|+4|+5|+6|+7|-1|-2|-3|-4|-5|-6|-7") COLOR:color FACE:string>
+  <$deftag LANG /CLOSE /WHTSPC [__attrs] >
   <$deftag MULTICOL /CLOSE /JERK COLS:string GUTTER:string WIDTH:string>
   <$deftag NEXTID N:string>
   <$deftag NOEMBED /CLOSE /JERK>
   <$deftag NOBR /CLOSE /JERK>
   <$deftag NOTE /CLOSE /LAZY="ciklms">
   <$deftag OVERLAY SRC:uri/x/z/r MD:string UNITS:string X:string Y:string  WIDTH:string/j HEIGHT:string/j IMAGEMAP:uri>
-  <$deftag PERSON /CLOSE /WHTSPC [__coreattrs] [__i18n]>
+  <$deftag PERSON /CLOSE /WHTSPC [__attrs] >
   <$deftag RANGE /LAZY="ci" FROM:uri UNTIL:uri>
   <$deftag SPACER /JERK TYPE:enum("vertical|horizontal|block") SIZE:string [__WidthHeight] ALIGN:enum("top|bottom|middle|left|right|texttop|absmiddle|baseline|absbottom")>
   <$deftag WBR /JERK>
