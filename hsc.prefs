@@ -103,7 +103,6 @@
 <$if COND=(defined HSC.OPTS.XHTML)>
   <$varlist __Background> 
   <$varlist __BodyColors>
-  <$varlist __Compact>
   <$varlist __Focus [__TabIndex] [__AccessKey] [__OnFocusOnBlur]>
   <$varlist __Target>
   <$define __applet:string=''>
@@ -111,7 +110,6 @@
   <$varlist __Background BGCOLOR:color BACKGROUND:uri/O>
   <$varlist __BodyColors TEXT:color LINK:color VLINK:color ALINK:color
                          BGCOLOR:color>
-  <$varlist __Compact COMPACT:bool>
   <$varlist __Focus [__AccessKey] [__OnFocusOnBlur]>
   <$varlist __Target TARGET:string>
   <$define __applet:string='applet|'>
@@ -439,7 +437,7 @@
 <$deftag DEL /CLOSE /WHTSPC [__attrs] CITE:uri DATETIME:string>
 <$deftag DFN /CLOSE /WHTSPC [__attrs]>
 <$deftag DIV /CLOSE /NAW=(__elem-inline) [__attrs] NOWRAP:bool/O [__Align]>
-<$deftag DL /CLOSE /NAW=(__elem-inline) [__attrs] [__Compact]>
+<$deftag DL /CLOSE /NAW=(__elem-inline) [__attrs]>
 <$deftag DT /AUTOCLOSE /MBI="dl" [__attrs]>
 <$deftag EM /CLOSE /WHTSPC [__attrs]>
 <$deftag FIELDSET /CLOSE [__attrs]>
@@ -509,10 +507,10 @@
   <$deftag HEAD /CLOSE /RECOMMENDED /ONLYONCE  PROFILE:uri>
   <$deftag HTML /CLOSE /RECOMMENDED /ONLYONCE [__attrs] >
   <$deftag IMG /EMPTY /NAW="pre" [__attrs] SRC:uri/X/Z/R ALT:string/R LONGDESC:uri NAME:string HEIGHT:string WIDTH:string USEMAP:uri ISMAP:bool/J [__IAlign] BORDER:num HSPACE:string VSPACE:string LOWSRC:uri/J>
-  <$deftag OL /CLOSE /NAW=(__elem-inline) [__attrs] TYPE:enum("1|a|i") COMPACT:bool START:num>
+  <$deftag OL /CLOSE /NAW=(__elem-inline) [__attrs] TYPE:enum("1|a|i") START:num>
   <$deftag TABLE /CLOSE [__attrs] [__Summary] WIDTH:string BORDER:num ALIGN:enum("left|center|right")/O [__TFrameRules] CELLSPACING:string CELLPADDING:string [__Background] UNITS:string/O NOWRAP:bool/J NOFLOW:bool/J>
   <$deftag TITLE /CLOSE /RECOMMENDED /ONLYONCE /WHTSPC [__attrs]>
-  <$deftag UL /CLOSE /NAW=(__elem-inline) [__attrs] TYPE:enum("disc|square|circle") COMPACT:bool DINGBAT:string/O WRAP:string/O PLAIN:bool/O>
+  <$deftag UL /CLOSE /NAW=(__elem-inline) [__attrs] TYPE:enum("disc|square|circle") DINGBAT:string/O WRAP:string/O PLAIN:bool/O>
 
   <* OBSOLETE tags as of HTML 4.01 *>
   <$deftag APPLET /CLOSE /NAW="pre" /OBSOLETE [__attrs] CODEBASE:uri ARCHIVE:string CODE:string OBJECT:string [__Alt] NAME:id [__WidthHeight] HSPACE:num VSPACE:num [__IAlign]>
