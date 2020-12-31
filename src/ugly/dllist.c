@@ -150,7 +150,12 @@ void move_dlnode(DLLIST *dest, DLLIST *src, DLNODE *node)
 {
    /* detach node w/o deleting it */
    dll_detach_node(src,node);
-   dll_append_node(dest,node);
+
+   /* insert at beginning of list */
+   node->prev = NULL;
+   if (NULL != (node->next = dest->first)) dest->first->prev = node;
+   dest->first = node;
+   if (NULL == dest->last) dest->last = node;
 }
 
 /*

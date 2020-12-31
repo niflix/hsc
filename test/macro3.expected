@@ -1,0 +1,13 @@
+<html>
+  <head>
+    <title>macro3</title>
+  </head>
+  <body>
+    <h1>foo 1</h1>
+      bar(foo)=bar_foo foo(foo)=foo_foo fox(foo)=fox_foo
+    bar(foo)=bar_foo foo(foo)=foo_foo fox(foo)=fox_foo
+    <h1>foo 2</h1>
+      bar(foo)=bar_foo foo(foo)=foo_foo fox(foo)=fox_foo
+    bar(foo)=bar_foo foo(foo)=foo_foo fox(foo)=fox_foo
+  </body>
+</html>
