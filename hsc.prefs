@@ -99,7 +99,7 @@
 <$varlist __BodyColors TEXT:color LINK:color VLINK:color ALINK:color
                        BGCOLOR:color>
 <$varlist __Focus [__AccessKey] >
-<$varlist __Target TARGET:string>
+<$varlist __Target target:enum("_blank|_self|_parent|_top")> <* 4.6.2 *>
 
 <* some HSC defaults *>
 <$define HSC.CLICK-HERE:string/c="click|here|klicken">
