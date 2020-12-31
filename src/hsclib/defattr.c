@@ -620,10 +620,13 @@ void move_local_varlist(DLLIST * destlist, DLLIST * varlist, ULONG mci)
       DLNODE *nd = varlist->first;
       
       while (NULL != nd) {
+	DLNODE *nd_nxt = nd->next;
+	
          if((((HSCATTR*)(nd->data))->macro_id) == mci) { 
             move_dlnode(destlist,varlist,nd);
          }
-         nd = dln_next(nd);
+         nd = nd_nxt;
+	 
       }
    } else panic("mci=MCI_ERROR");
 }
