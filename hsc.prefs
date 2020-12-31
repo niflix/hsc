@@ -77,7 +77,6 @@
 <$varlist __ColumnAttrs SPAN:num WIDTH:string [__HVAlign] CHAR:string
                         CHAROFF:string>
 <$varlist __WidthHeight WIDTH:string HEIGHT:string>
-<$varlist __OnFocusOnBlur onFocus:string onBlur:string>
 <$varlist __TFrameRules FRAME:enum("void|above|below|hsides|lhs|rhs|vsides|box|border")
                         RULES:enum("none|groups|rows|cols|all")>
 
@@ -99,7 +98,7 @@
 <$varlist __Background BGCOLOR:color BACKGROUND:uri/O>
 <$varlist __BodyColors TEXT:color LINK:color VLINK:color ALINK:color
                        BGCOLOR:color>
-<$varlist __Focus [__AccessKey] [__OnFocusOnBlur]>
+<$varlist __Focus [__AccessKey] >
 <$varlist __Target TARGET:string>
 <$define __applet:string='applet|'>
 
@@ -440,7 +439,7 @@
 <$deftag INPUT /EMPTY /NAW="button" [__attrs] TYPE:enum("text|password|checkbox|radio|submit|reset|file|hidden|image|button") NAME:string VALUE:string CHECKED:bool DISABLED:bool READONLY:bool SIZE:string MAXLENGTH:num SRC:uri [__Alt] USEMAP:uri ISMAP:bool [__Focus] ACCEPT:string [__IAlign]>
 <$deftag INS /CLOSE /WHTSPC [__attrs] CITE:uri DATETIME:string>
 <$deftag KBD /CLOSE /WHTSPC [__attrs]>
-<$deftag LABEL /CLOSE /NAW="button" [__attrs] FOR:string [__AccessKey] [__OnFocusOnBlur]>
+<$deftag LABEL /CLOSE /NAW="button" [__attrs] FOR:string [__AccessKey] >
 <$deftag LEGEND /CLOSE /MBI="fieldset" /NAW=(__elem-inline) [__attrs] [__AccessKey] ALIGN:enum("top|bottom|left|right")>
 <$deftag LI /AUTOCLOSE /MBI="ul|ol|dir|menu" [__attrs] VALUE:string SKIP:string/O DINGBAT:string/O TYPE:string/J>
 <$deftag LINK /EMPTY /MBI="head" [__attrs] CHARSET:string HREF:uri/x HREFLANG:string TYPE:string REL:string REV:string MEDIA:string URN:string/JERK METHODS:string/JERK>
@@ -456,7 +455,7 @@
 <$deftag Q /CLOSE /WHTSPC [__attrs] CITE:uri>
 <$deftag SAMP /CLOSE /WHTSPC [__attrs]>
 <$deftag SCRIPT /CLOSE /NAW="select|script" CHARSET:string TYPE:string/R LANGUAGE:string/O SRC:uri DEFER:bool EVENT:string FOR:uri>
-<$deftag SELECT /CLOSE /MBI="form" /NAW="button" [__attrs] NAME:string/r SIZE:num MULTIPLE:bool ROWS:string/O COLS:string/O DISABLED:bool ERROR:string/O WIDTH:string/O HEIGHT:string/O UNITS:string/O [__OnFocusOnBlur]>
+<$deftag SELECT /CLOSE /MBI="form" /NAW="button" [__attrs] NAME:string/r SIZE:num MULTIPLE:bool ROWS:string/O COLS:string/O DISABLED:bool ERROR:string/O WIDTH:string/O HEIGHT:string/O UNITS:string/O >
 <$deftag SMALL /CLOSE /NAW="pre" /WHTSPC [__attrs]>
 <$deftag SPAN /CLOSE [__attrs]>
 <$deftag STRONG /CLOSE /WHTSPC [__attrs]>
