@@ -87,13 +87,11 @@
    W3C Accessibility Guidelines for non-visual user agents *>
 <$if COND=(defined HSC_ACCESSIBILITY_MOANING)>
   <$varlist __Alt ALT:string/RCMD>
-  <$varlist __Summary SUMMARY:string/RCMD>
   <$varlist __Abbr ABBR:string/RCMD>
   <$varlist __TabIndex TABINDEX:num/RCMD>
   <$varlist __AccessKey ACCESSKEY:string/RCMD>
 <$else>
   <$varlist __Alt ALT:string>
-  <$varlist __Summary SUMMARY:string>
   <$varlist __Abbr ABBR:string>
   <$varlist __TabIndex TABINDEX:num>
   <$varlist __AccessKey ACCESSKEY:string>
@@ -498,7 +496,7 @@
   <$deftag HTML /CLOSE /REQUIRED /ONLYONCE  XMLNS:uri>
   <$deftag IMG /EMPTY /NAW="pre" [__attrs] SRC:uri/X/Z/R ALT:string/R LONGDESC:uri NAME:string HEIGHT:string/O WIDTH:string/O USEMAP:uri ISMAP:bool/J [__IAlign] BORDER:num/O HSPACE:string/O VSPACE:string/O LOWSRC:uri/J>
   <$deftag OL /CLOSE /NAW=(__elem-inline) [__attrs]>
-  <$deftag TABLE /CLOSE [__attrs] [__Summary] WIDTH:string BORDER:num ALIGN:enum("left|center|right")/O [__TFrameRules] CELLSPACING:string CELLPADDING:string [__Background]>
+  <$deftag TABLE /CLOSE [__attrs] WIDTH:string BORDER:num ALIGN:enum("left|center|right")/O [__TFrameRules] CELLSPACING:string CELLPADDING:string [__Background]>
   <$deftag TITLE /CLOSE /REQUIRED /ONLYONCE /MBI="head" /WHTSPC [__attrs]>
   <$deftag UL /CLOSE /NAW=(__elem-inline) [__attrs]>
 <$else>
@@ -508,7 +506,7 @@
   <$deftag HTML /CLOSE /RECOMMENDED /ONLYONCE [__attrs] >
   <$deftag IMG /EMPTY /NAW="pre" [__attrs] SRC:uri/X/Z/R ALT:string/R LONGDESC:uri NAME:string HEIGHT:string WIDTH:string USEMAP:uri ISMAP:bool/J [__IAlign] BORDER:num HSPACE:string VSPACE:string LOWSRC:uri/J>
   <$deftag OL /CLOSE /NAW=(__elem-inline) [__attrs] TYPE:enum("1|a|i") START:num>
-  <$deftag TABLE /CLOSE [__attrs] [__Summary] WIDTH:string BORDER:num ALIGN:enum("left|center|right")/O [__TFrameRules] CELLSPACING:string CELLPADDING:string [__Background] UNITS:string/O NOWRAP:bool/J NOFLOW:bool/J>
+  <$deftag TABLE /CLOSE [__attrs] WIDTH:string BORDER:num ALIGN:enum("left|center|right")/O [__TFrameRules] CELLSPACING:string CELLPADDING:string [__Background] UNITS:string/O NOWRAP:bool/J NOFLOW:bool/J>
   <$deftag TITLE /CLOSE /RECOMMENDED /ONLYONCE /WHTSPC [__attrs]>
   <$deftag UL /CLOSE /NAW=(__elem-inline) [__attrs] TYPE:enum("disc|square|circle") DINGBAT:string/O WRAP:string/O PLAIN:bool/O>
 
