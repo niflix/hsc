@@ -408,13 +408,11 @@
 <$deftag ! /SPECIAL>
 <$deftag A /CLOSE /NAW="a" /WHTSPC [__attrs] href:uri md:string CHARSET:string TYPE:string NAME:id HREFLANG:string [__Target] REL:string REV:string [__Shape] COORDS:string [__Focus]>
 <$deftag ABBR /CLOSE /WHTSPC [__attrs]>
-<$deftag ACRONYM /CLOSE /WHTSPC [__attrs]>
 <$deftag ADDRESS /CLOSE [__attrs]>
 <$deftag AREA /MBI="map" /EMPTY [__Shape] COORDS:string HREF:uri [__Target] NOHREF:bool ALT:string/R [__Focus]>
 <$deftag B /CLOSE /WHTSPC [__attrs]>
 <$deftag BASE /MBI="head" /EMPTY /ONLYONCE id:id href:uri [__Target]>
 <$deftag BDO [__attrs]>
-<$deftag BIG /CLOSE /NAW="pre" /WHTSPC [__attrs]>
 <$deftag BLOCKQUOTE /CLOSE /NAW=(__elem-inline) [__attrs] CITE:uri>
 <$deftag BR /EMPTY [__attrs] clear:enum("left|right|all|none")>
 <$deftag BUTTON /CLOSE /NAW="a|input|select|textarea|label|button|form|isindex|fieldset|iframe" [__attrs] NAME:id VALUE:string TYPE:enum("button|submit|reset") DISABLED:bool [__Focus]>
@@ -431,8 +429,6 @@
 <$deftag EM /CLOSE /WHTSPC [__attrs]>
 <$deftag FIELDSET /CLOSE [__attrs]>
 <$deftag FORM /CLOSE /NAW=(__elem-inline + "|form") [__attrs] ACTION:uri/R METHOD:enum("get|post") ENCTYPE:string ACCEPT:string NAME:string [__Target] ACCEPT-CHARSET:string SCRIPT:string/O>
-<$deftag FRAME /EMPTY /MBI="frameset" [__attrs] LONGDESC:uri NAME:string SRC:uri FRAMEBORDER:enum("1|0") MARGINWIDTH:num MARGINHEIGHT:num NORESIZE:bool SCROLLING:enum("yes|no|auto")>
-<$deftag FRAMESET /CLOSE [__attrs] ROWS:string COLS:string BORDER:string/J FRAMEBORDER:num/J FRAMESPACING:num/J>
 <$deftag H1 /CLOSE /NAW=(__elem-inline + "|h1|h2|h3|h4|h5|h6") /WHTSPC [__attrs] [__HeadingAttrs]>
 <$deftag H2 /CLOSE /NAW=(__elem-inline + "|h1|h2|h3|h4|h5|h6") /WHTSPC [__attrs] [__HeadingAttrs]>
 <$deftag H3 /CLOSE /NAW=(__elem-inline + "|h1|h2|h3|h4|h5|h6") /WHTSPC [__attrs] [__HeadingAttrs]>
@@ -451,7 +447,6 @@
 <$deftag LINK /EMPTY /MBI="head" [__attrs] CHARSET:string HREF:uri/x HREFLANG:string TYPE:string REL:string REV:string MEDIA:string URN:string/JERK METHODS:string/JERK>
 <$deftag MAP /CLOSE [__attrs] NAME:id>
 <$deftag META /EMPTY /MBI="head"  HTTP-EQUIV:string NAME:string CONTENT:string/R SCHEME:string>
-<$deftag NOFRAMES /MBI=(__applet + "blockquote|body|button|center|dd|del|div|fieldset|form|frameset|iframe|ins|li|map|noscript|object|td|th") /CLOSE [__attrs]>
 <$deftag NOSCRIPT /CLOSE /NAW=(__elem-inline) [__attrs]>
 <$deftag OBJECT /CLOSE /NAW="pre" [__attrs] DECLARE:bool CLASSID:uri CODEBASE:uri DATA:uri TYPE:string CODETYPE:string ARCHIVE:string STANDBY:string HEIGHT:string WIDTH:string USEMAP:uri NAME:string [__IAlign] BORDER:num HSPACE:num VSPACE:num>
 <$deftag OPTGROUP /CLOSE /MBI="select" [__attrs] DISABLED:bool LABEL:string>
@@ -476,7 +471,6 @@
 <$deftag TH /CLOSE /MBI="tr" /NAW=(__elem-inline) [__attrs] [__Abbr] AXIS:string HEADERS:string SCOPE:enum("row|col|rowgroup|colgroup") ROWSPAN:string COLSPAN:string [__HVAlign] NOWRAP:bool NOFLOW:bool/O [__Background] [__WidthHeight]>
 <$deftag THEAD /AUTOCLOSE /MBI="table" /NAW=(__elem-inline) [__attrs] [__HVAlign]>
 <$deftag TR /CLOSE /MBI="table|thead|tbody|tfoot" /NAW=(__elem-inline) [__attrs] NOWRAP:bool/O [__HVAlign] DP:string/O [__Background]>
-<$deftag TT /CLOSE /WHTSPC [__attrs]>
 <$deftag VAR /CLOSE /WHTSPC [__attrs]>
 
   <$deftag BODY /AUTOCLOSE /RECOMMENDED /ONLYONCE [__attrs] BACKGROUND:uri [__BodyColors]>
@@ -490,45 +484,65 @@
   <$deftag UL /CLOSE /NAW=(__elem-inline) [__attrs] TYPE:enum("disc|square|circle") DINGBAT:string/O WRAP:string/O PLAIN:bool/O>
 
   <* OBSOLETE tags as of HTML 4.01 *>
-  <$deftag APPLET /CLOSE /NAW="pre" /OBSOLETE [__attrs] CODEBASE:uri ARCHIVE:string CODE:string OBJECT:string [__Alt] NAME:id [__WidthHeight] HSPACE:num VSPACE:num [__IAlign]>
-  <$deftag CENTER /CLOSE /OBSOLETE [__attrs]>
   <$deftag HP0 /CLOSE /OBSOLETE /WHTSPC> <* highlight phrase *>
   <$deftag HP1 /CLOSE /OBSOLETE /WHTSPC>
   <$deftag HP2 /CLOSE /OBSOLETE /WHTSPC>
   <$deftag HP3 /CLOSE /OBSOLETE /WHTSPC>
-  <$deftag ISINDEX /EMPTY /OBSOLETE [__attrs]  PROMPT:string>
   <$deftag LH /CLOSE /OBSOLETE [__attrs] >
-  <$deftag LISTING /CLOSE /OBSOLETE>
   <$deftag MENU /CLOSE /OBSOLETE [__attrs] COMPACT:bool>
-  <$deftag PLAINTEXT /CLOSE /OBSOLETE>
   <$deftag S /CLOSE /WHTSPC /OBSOLETE [__attrs]>
-  <$deftag STRIKE /CLOSE /WHTSPC /OBSOLETE [__attrs]>
   <$deftag U /CLOSE /WHTSPC /OBSOLETE [__attrs]>
-  <$deftag XMP /CLOSE /OBSOLETE><$deftag DIR /CLOSE /OBSOLETE COMPACT:bool [__attrs]>
 
 <* dubious/JERK tags or otherwise not found in HTML 4.01 *>
   <$deftag AU /CLOSE /WHTSPC [__attrs] >
   <$deftag BANNER /CLOSE [__attrs] >
-  <$deftag BASEFONT /JERK /EMPTY /NAW="pre" id:id SIZE:enum("1|2|3|4|5|6|7") COLOR:color/O FACE:string>
-  <$deftag BGSOUND /JERK SRC:uri LOOP:string>
-  <$deftag BLINK /CLOSE /JERK>
   <$deftag BQ /CLOSE [__attrs]  NOWRAP:bool>
   <$deftag CREDIT /CLOSE /MBI="bq|fig" [__attrs] >
   <$deftag EMBED /AUTOCLOSE /JERK SRC:uri HEIGHT:string WIDTH:string ATTRIBUTE_1:string ATTRIBUTE_2:string>
   <$deftag FIG /CLOSE id:id class:string clear:enum("left|right|all|none") lang:string SRC:uri/x/z/r ALIGN:enum("left|right|center|justify|bleedleft|bleedright") NOFLOW:bool MD:string [__WidthHeight] UNITS:string IMAGEMAP:uri>
   <$deftag FN /CLOSE [__attrs] >
-  <$deftag FONT /JERK /CLOSE /NAW="pre" [__attrs]  SIZE:enum("1|2|3|4|5|6|7|+1|+2|+3|+4|+5|+6|+7|-1|-2|-3|-4|-5|-6|-7") COLOR:color FACE:string>
   <$deftag LANG /CLOSE /WHTSPC [__attrs] >
-  <$deftag MULTICOL /CLOSE /JERK COLS:string GUTTER:string WIDTH:string>
-  <$deftag NEXTID N:string>
-  <$deftag NOEMBED /CLOSE /JERK>
-  <$deftag NOBR /CLOSE /JERK>
   <$deftag NOTE /CLOSE id:id class:string clear:enum("left|right|all|none") lang:string md:string src:uri>
   <$deftag OVERLAY SRC:uri/x/z/r MD:string UNITS:string X:string Y:string  WIDTH:string/j HEIGHT:string/j IMAGEMAP:uri>
   <$deftag PERSON /CLOSE /WHTSPC [__attrs] >
   <$deftag RANGE id:id class:string FROM:uri UNTIL:uri>
-  <$deftag SPACER /JERK TYPE:enum("vertical|horizontal|block") SIZE:string [__WidthHeight] ALIGN:enum("top|bottom|middle|left|right|texttop|absmiddle|baseline|absbottom")>
   <$deftag WBR /JERK>
+
+
+<*
+ * 16.2 Non-conforming features
+ *
+ * Elements in the following list are entirely obsolete, and must not be used by authors.
+ *>
+
+<$deftag APPLET /CLOSE /OBSOLETE /JERK /NAW="pre" [__attrs] CODEBASE:uri ARCHIVE:string CODE:string OBJECT:string ALT:string NAME:id [__WidthHeight] HSPACE:num VSPACE:num [__IAlign]>
+<$deftag ACRONYM /CLOSE /OBSOLETE /WHTSPC [__attrs]>
+<$deftag BGSOUND /OBSOLETE /JERK [__attrs] SRC:uri LOOP:string>
+<$deftag DIR /CLOSE /OBSOLETE COMPACT:bool [__attrs]>
+<$deftag FRAME /OBSOLETE /EMPTY /MBI="frameset" [__attrs] LONGDESC:uri NAME:string SRC:uri FRAMEBORDER:enum("1|0") MARGINWIDTH:num MARGINHEIGHT:num NORESIZE:bool SCROLLING:enum("yes|no|auto")>
+<$deftag FRAMESET /CLOSE /OBSOLETE [__attrs] ROWS:string COLS:string BORDER:string/J FRAMEBORDER:num/J FRAMESPACING:num/J>
+<$deftag NOFRAMES /CLOSE /OBSOLETE [__attrs]>
+<$deftag ISINDEX /EMPTY /OBSOLETE [__attrs]  PROMPT:string>
+<$deftag KEYGEN /OBSOLETE [__attrs]>
+<$deftag LISTING /CLOSE /OBSOLETE [__attrs]>
+<$deftag MENUITEM /OBSOLETE [__attrs]>
+<$deftag NEXTID N:string /OBSOLETE [__attrs]>
+<$deftag NOEMBED /CLOSE /OBSOLETE /JERK>
+<$deftag PLAINTEXT /CLOSE /OBSOLETE>
+<$deftag RB /OBSOLETE>
+<$deftag RTC /OBSOLETE>
+<$deftag STRIKE /CLOSE /WHTSPC /OBSOLETE [__attrs]>
+<$deftag XMP /CLOSE /OBSOLETE>
+<$deftag BASEFONT /OBSOLETE /JERK /EMPTY /NAW="pre" id:id SIZE:enum("1|2|3|4|5|6|7") COLOR:color/O FACE:string>
+<$deftag BIG /CLOSE /OBSOLETE /NAW="pre" /WHTSPC [__attrs]>
+<$deftag BLINK /CLOSE /OBSOLETE /JERK>
+<$deftag CENTER /CLOSE /OBSOLETE [__attrs]>
+<$deftag FONT /JERK /CLOSE /NAW="pre" [__attrs]  SIZE:enum("1|2|3|4|5|6|7|+1|+2|+3|+4|+5|+6|+7|-1|-2|-3|-4|-5|-6|-7") COLOR:color FACE:string>
+<$deftag marquee /OBSOLETE [__attrs] behavior:enum("scroll|slide|alternate") direction:enum("left|right|up|down") truespeed:BOOL>
+<$deftag MULTICOL /CLOSE /JERK COLS:string GUTTER:string WIDTH:string>
+<$deftag NOBR /CLOSE /JERK>
+<$deftag SPACER /JERK TYPE:enum("vertical|horizontal|block") SIZE:string [__WidthHeight] ALIGN:enum("top|bottom|middle|left|right|texttop|absmiddle|baseline|absbottom")>
+<$deftag TT /CLOSE /WHTSPC [__attrs]>
 
 
 <* vi: set nowrap tw=0 et ts=2: *>
