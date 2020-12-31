@@ -98,7 +98,6 @@
 <$varlist __Background BGCOLOR:color BACKGROUND:uri/O>
 <$varlist __BodyColors TEXT:color LINK:color VLINK:color ALINK:color
                        BGCOLOR:color>
-<$varlist __Focus [__AccessKey] >
 <$varlist __Target target:enum("_blank|_self|_parent|_top")> <* 4.6.2 *>
 
 <* some HSC defaults *>
@@ -403,16 +402,16 @@
 <* HTML *>
 
 <$deftag ! /SPECIAL>
-<$deftag A /CLOSE /NAW="a" /WHTSPC [__attrs] href:uri md:string CHARSET:string TYPE:string NAME:id HREFLANG:string [__Target] REL:string REV:string COORDS:string [__Focus]>
+<$deftag A /CLOSE /NAW="a" /WHTSPC [__attrs] href:uri md:string CHARSET:string TYPE:string NAME:id HREFLANG:string [__Target] REL:string REV:string COORDS:string [__AccessKey]>
 <$deftag ABBR /CLOSE /WHTSPC [__attrs]>
 <$deftag ADDRESS /CLOSE [__attrs]>
-<$deftag AREA /MBI="map" /EMPTY SHAPE:enum("rect|circle|poly|default") COORDS:string HREF:uri [__Target] NOHREF:bool ALT:string/R [__Focus]>
+<$deftag AREA /MBI="map" /EMPTY SHAPE:enum("rect|circle|poly|default") COORDS:string HREF:uri [__Target] NOHREF:bool ALT:string/R [__AccessKey]>
 <$deftag B /CLOSE /WHTSPC [__attrs]>
 <$deftag BASE /MBI="head" /EMPTY /ONLYONCE id:id href:uri [__Target]>
 <$deftag BDO [__attrs]>
 <$deftag BLOCKQUOTE /CLOSE /NAW=(__elem-inline) [__attrs] CITE:uri>
 <$deftag BR /EMPTY [__attrs] clear:enum("left|right|all|none")>
-<$deftag BUTTON /CLOSE /NAW="a|input|select|textarea|label|button|form|isindex|fieldset|iframe" [__attrs] NAME:id VALUE:string TYPE:enum("button|submit|reset") DISABLED:bool [__Focus]>
+<$deftag BUTTON /CLOSE /NAW="a|input|select|textarea|label|button|form|isindex|fieldset|iframe" [__attrs] NAME:id VALUE:string TYPE:enum("button|submit|reset") DISABLED:bool [__AccessKey]>
 <$deftag CAPTION /CLOSE /MBI="fig|table" [__attrs] ALIGN:enum("top|bottom|left|right")>
 <$deftag CITE /CLOSE /WHTSPC [__attrs]>
 <$deftag CODE /CLOSE /WHTSPC [__attrs]>
@@ -435,7 +434,7 @@
 <$deftag HR /EMPTY [__attrs] SRC:uri/Z/O SIZE:string WIDTH:string ALIGN:enum("left|right|center") NOSHADE:bool>
 <$deftag I /CLOSE /WHTSPC [__attrs]>
 <$deftag IFRAME /NAW="button" [__attrs] LONGDESC:uri NAME:string SRC:uri FRAMEBORDER:enum("1|0") MARGINWIDTH:num MARGINHEIGHT:num SCROLLING:enum("yes|no|auto") [__IAlign] HEIGHT:string WIDTH:string>
-<$deftag INPUT /EMPTY /NAW="button" [__attrs] TYPE:enum("text|password|checkbox|radio|submit|reset|file|hidden|image|button") NAME:string VALUE:string CHECKED:bool DISABLED:bool READONLY:bool SIZE:string MAXLENGTH:num SRC:uri [__Alt] USEMAP:uri ISMAP:bool [__Focus] ACCEPT:string [__IAlign]>
+<$deftag INPUT /EMPTY /NAW="button" [__attrs] TYPE:enum("text|password|checkbox|radio|submit|reset|file|hidden|image|button") NAME:string VALUE:string CHECKED:bool DISABLED:bool READONLY:bool SIZE:string MAXLENGTH:num SRC:uri [__Alt] USEMAP:uri ISMAP:bool [__AccessKey] ACCEPT:string [__IAlign]>
 <$deftag INS /CLOSE /WHTSPC [__attrs] CITE:uri DATETIME:string>
 <$deftag KBD /CLOSE /WHTSPC [__attrs]>
 <$deftag LABEL /CLOSE /NAW="button" [__attrs] FOR:string [__AccessKey] >
@@ -463,7 +462,7 @@
 <$deftag SUP /CLOSE /NAW="pre" /WHTSPC [__attrs]>
 <$deftag TBODY /AUTOCLOSE /MBI="table" /NAW=(__elem-inline) [__attrs] [__HVAlign]>
 <$deftag TD /CLOSE /MBI="tr" /NAW=(__elem-inline) [__attrs] ABBR:string AXIS:string HEADERS:string SCOPE:enum("row|col|rowgroup|colgroup") ROWSPAN:string COLSPAN:string [__HVAlign] NOWRAP:bool NOFLOW:bool/O [__Background] [__WidthHeight]>
-<$deftag TEXTAREA /MBI="form" /CLOSE [__attrs] NAME:string ROWS:num/R COLS:num/R DISABLED:bool READONLY:bool [__Focus] WRAP:enum("off|soft|hard")/O>
+<$deftag TEXTAREA /MBI="form" /CLOSE [__attrs] NAME:string ROWS:num/R COLS:num/R DISABLED:bool READONLY:bool [__AccessKey] WRAP:enum("off|soft|hard")/O>
 <$deftag TFOOT /AUTOCLOSE /MBI="table" /NAW=(__elem-inline) [__attrs] [__HVAlign]>
 <$deftag TH /CLOSE /MBI="tr" /NAW=(__elem-inline) [__attrs] [__Abbr] AXIS:string HEADERS:string SCOPE:enum("row|col|rowgroup|colgroup") ROWSPAN:string COLSPAN:string [__HVAlign] NOWRAP:bool NOFLOW:bool/O [__Background] [__WidthHeight]>
 <$deftag THEAD /AUTOCLOSE /MBI="table" /NAW=(__elem-inline) [__attrs] [__HVAlign]>
