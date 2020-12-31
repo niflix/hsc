@@ -97,21 +97,12 @@
   <$varlist __AccessKey ACCESSKEY:string>
 </$if>
 
-<* Some attributes get treated differently in XHTML mode (also see below) *>
-<$if COND=(defined HSC.OPTS.XHTML)>
-  <$varlist __Background> 
-  <$varlist __BodyColors>
-  <$varlist __Focus [__TabIndex] [__AccessKey] [__OnFocusOnBlur]>
-  <$varlist __Target>
-  <$define __applet:string=''>
-<$else>
-  <$varlist __Background BGCOLOR:color BACKGROUND:uri/O>
-  <$varlist __BodyColors TEXT:color LINK:color VLINK:color ALINK:color
-                         BGCOLOR:color>
-  <$varlist __Focus [__AccessKey] [__OnFocusOnBlur]>
-  <$varlist __Target TARGET:string>
-  <$define __applet:string='applet|'>
-</$if>
+<$varlist __Background BGCOLOR:color BACKGROUND:uri/O>
+<$varlist __BodyColors TEXT:color LINK:color VLINK:color ALINK:color
+                       BGCOLOR:color>
+<$varlist __Focus [__AccessKey] [__OnFocusOnBlur]>
+<$varlist __Target TARGET:string>
+<$define __applet:string='applet|'>
 
 <* some HSC defaults *>
 <$define HSC.CLICK-HERE:string/c="click|here|klicken">
@@ -488,18 +479,6 @@
 <$deftag TT /CLOSE /WHTSPC [__attrs]>
 <$deftag VAR /CLOSE /WHTSPC [__attrs]>
 
-<* tags with special treatment in XHTML mode - $VARLISTs would complicate things here *>
-<$if COND=(defined HSC.OPTS.XHTML)>
-  <$deftag BODY /CLOSE /REQUIRED /ONLYONCE /MBI="html" [__attrs] BACKGROUND:uri [__BodyColors] onLoad:string onUnload:string>
-  <$deftag COLGROUP /CLOSE /MBI="table" [__attrs] [__ColumnAttrs]>
-  <$deftag HEAD /CLOSE /REQUIRED /ONLYONCE /MBI="html"  PROFILE:uri>
-  <$deftag HTML /CLOSE /REQUIRED /ONLYONCE  XMLNS:uri>
-  <$deftag IMG /EMPTY /NAW="pre" [__attrs] SRC:uri/X/Z/R ALT:string/R LONGDESC:uri NAME:string HEIGHT:string/O WIDTH:string/O USEMAP:uri ISMAP:bool/J [__IAlign] BORDER:num/O HSPACE:string/O VSPACE:string/O LOWSRC:uri/J>
-  <$deftag OL /CLOSE /NAW=(__elem-inline) [__attrs]>
-  <$deftag TABLE /CLOSE [__attrs] WIDTH:string BORDER:num ALIGN:enum("left|center|right")/O [__TFrameRules] CELLSPACING:string CELLPADDING:string [__Background]>
-  <$deftag TITLE /CLOSE /REQUIRED /ONLYONCE /MBI="head" /WHTSPC [__attrs]>
-  <$deftag UL /CLOSE /NAW=(__elem-inline) [__attrs]>
-<$else>
   <$deftag BODY /AUTOCLOSE /RECOMMENDED /ONLYONCE [__attrs] BACKGROUND:uri [__BodyColors]>
   <$deftag COLGROUP /AUTOCLOSE /MBI="table" [__attrs] [__ColumnAttrs]>
   <$deftag HEAD /CLOSE /RECOMMENDED /ONLYONCE  PROFILE:uri>
@@ -550,7 +529,7 @@
   <$deftag RANGE id:id class:string FROM:uri UNTIL:uri>
   <$deftag SPACER /JERK TYPE:enum("vertical|horizontal|block") SIZE:string [__WidthHeight] ALIGN:enum("top|bottom|middle|left|right|texttop|absmiddle|baseline|absbottom")>
   <$deftag WBR /JERK>
-</$if>
+
 
 <* vi: set nowrap tw=0 et ts=2: *>
 <* EOF *>
