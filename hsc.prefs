@@ -9,7 +9,7 @@
 ** released under GPL als part of HSC
 **
 *>
-
+7
 <* Specs from https://html.spec.whatwg.org/ on 20201217 *>
 
 <*
@@ -18,6 +18,17 @@
  *   - missing is
  *   - missing slot
  *   - missing role and aria-*
+ *
+ * What about / todo
+ *   - a set datatype for rel, sandbox and so on.
+ *   - positive integer (width, height)
+ *   - /X /Z
+ *   - /naw /mbi
+ *   - input.list references datalist.id
+ *   - input.set is valid floating point number, meter uses floats too
+ *   - label.for references valid id
+ *   - erm... <math> <svg>
+ *   - type is a valid mimetype
  *>
 
 <$varlist __events onabort:string onauxclick:string onblur:string oncancel:string oncanplay:string oncanplaythrough:string
@@ -54,6 +65,18 @@
 		   [__events]>
 
 <$varlist __attrs  [__global] [__events]>
+
+<$varlist __referrer referrerpolicy:enum("|no-referrer|no-referrer-when-downgrade|same-origin|origin|strict-origin|origin-when-cross-origin|strict-origin-when-cross-origin|unsafe-url")>
+<$varlist __target target:enum("_blank|_self|_parent|_top")>
+<$varlist __formtarget formtarget:enum("_blank|_self|_parent|_top")>
+<$varlist __hyperlink href:uri [__referrer] [__target] download:string ping:string rel:string>
+<$varlist __crossorigin crossorigin:enum("anonymous|use-credentials")>
+<$varlist __media src:uri [__crossorigin] preload:enum("none|metadata|auto") autoplay:bool loop:bool muted:bool controls:bool>
+<$varlist __insdel cite:uri datetime:string>
+<$varlist __dimension width:num height:num>
+<$varlist __form action:uri enctype:enum("application/x-www-form-urlencoded|multipart/form-data|text/plain") method:enum("get|post|dialog") novalidate:bool [__target]>
+<$varlist __forform form:string formaction:uri formenctype:enum("application/x-www-form-urlencoded|multipart/form-data|text/plain") formmethod:enum("get|post|dialog") formnovalidate:bool [__formtarget]>
+<$varlist __loading loading:enum("lazy|eager")>
 
 <* some ENUMs *>
 <$varlist __Align ALIGN:enum("left|center|right|justify")>     <* general alignment *>
@@ -98,7 +121,6 @@
 <$varlist __Background BGCOLOR:color BACKGROUND:uri/O>
 <$varlist __BodyColors TEXT:color LINK:color VLINK:color ALINK:color
                        BGCOLOR:color>
-<$varlist __Target target:enum("_blank|_self|_parent|_top")> <* 4.6.2 *>
 
 <* some HSC defaults *>
 <$define HSC.CLICK-HERE:string/c="click|here|klicken">
@@ -401,146 +423,123 @@
 
 <* HTML *>
 
-<$deftag ! /SPECIAL>
-<$deftag A /CLOSE /NAW="a" /WHTSPC [__attrs] href:uri md:string CHARSET:string TYPE:string NAME:id HREFLANG:string [__Target] REL:string REV:string COORDS:string [__AccessKey]>
-<$deftag ABBR /CLOSE /WHTSPC [__attrs]>
-<$deftag ADDRESS /CLOSE [__attrs]>
-<$deftag AREA /MBI="map" /EMPTY SHAPE:enum("rect|circle|poly|default") COORDS:string HREF:uri [__Target] NOHREF:bool ALT:string/R [__AccessKey]>
-<$deftag B /CLOSE /WHTSPC [__attrs]>
-<$deftag BASE /MBI="head" /EMPTY /ONLYONCE id:id href:uri [__Target]>
-<$deftag BDO [__attrs]>
-<$deftag BLOCKQUOTE /CLOSE /NAW=(__elem-inline) [__attrs] CITE:uri>
-<$deftag BR /EMPTY [__attrs] clear:enum("left|right|all|none")>
-<$deftag BUTTON /CLOSE /NAW="a|input|select|textarea|label|button|form|isindex|fieldset|iframe" [__attrs] NAME:id VALUE:string TYPE:enum("button|submit|reset") DISABLED:bool [__AccessKey]>
-<$deftag CAPTION /CLOSE /MBI="fig|table" [__attrs] ALIGN:enum("top|bottom|left|right")>
-<$deftag CITE /CLOSE /WHTSPC [__attrs]>
-<$deftag CODE /CLOSE /WHTSPC [__attrs]>
-<$deftag COL /EMPTY /MBI="table|colgroup" [__attrs] [__ColumnAttrs]>
-<$deftag DD /AUTOCLOSE /MBI="dl" [__attrs]>
-<$deftag DEL /CLOSE /WHTSPC [__attrs] CITE:uri DATETIME:string>
-<$deftag DFN /CLOSE /WHTSPC [__attrs]>
-<$deftag DIV /CLOSE /NAW=(__elem-inline) [__attrs] NOWRAP:bool/O [__Align]>
-<$deftag DL /CLOSE /NAW=(__elem-inline) [__attrs]>
-<$deftag DT /AUTOCLOSE /MBI="dl" [__attrs]>
-<$deftag EM /CLOSE /WHTSPC [__attrs]>
-<$deftag FIELDSET /CLOSE [__attrs]>
-<$deftag FORM /CLOSE /NAW=(__elem-inline + "|form") [__attrs] ACTION:uri/R METHOD:enum("get|post") ENCTYPE:string ACCEPT:string NAME:string [__Target] ACCEPT-CHARSET:string SCRIPT:string/O>
-<$deftag H1 /CLOSE /NAW=(__elem-inline + "|h1|h2|h3|h4|h5|h6") /WHTSPC [__attrs] [__HeadingAttrs]>
-<$deftag H2 /CLOSE /NAW=(__elem-inline + "|h1|h2|h3|h4|h5|h6") /WHTSPC [__attrs] [__HeadingAttrs]>
-<$deftag H3 /CLOSE /NAW=(__elem-inline + "|h1|h2|h3|h4|h5|h6") /WHTSPC [__attrs] [__HeadingAttrs]>
-<$deftag H4 /CLOSE /NAW=(__elem-inline + "|h1|h2|h3|h4|h5|h6") /WHTSPC [__attrs] [__HeadingAttrs]>
-<$deftag H5 /CLOSE /NAW=(__elem-inline + "|h1|h2|h3|h4|h5|h6") /WHTSPC [__attrs] [__HeadingAttrs]>
-<$deftag H6 /CLOSE /NAW=(__elem-inline + "|h1|h2|h3|h4|h5|h6") /WHTSPC [__attrs] [__HeadingAttrs]>
-<$deftag HR /EMPTY [__attrs] SRC:uri/Z/O SIZE:string WIDTH:string ALIGN:enum("left|right|center") NOSHADE:bool>
-<$deftag I /CLOSE /WHTSPC [__attrs]>
-<$deftag IFRAME /NAW="button" [__attrs] LONGDESC:uri NAME:string SRC:uri FRAMEBORDER:enum("1|0") MARGINWIDTH:num MARGINHEIGHT:num SCROLLING:enum("yes|no|auto") [__IAlign] HEIGHT:string WIDTH:string>
-<$deftag INPUT /EMPTY /NAW="button" [__attrs] TYPE:enum("text|password|checkbox|radio|submit|reset|file|hidden|image|button") NAME:string VALUE:string CHECKED:bool DISABLED:bool READONLY:bool SIZE:string MAXLENGTH:num SRC:uri [__Alt] USEMAP:uri ISMAP:bool [__AccessKey] ACCEPT:string [__IAlign]>
-<$deftag INS /CLOSE /WHTSPC [__attrs] CITE:uri DATETIME:string>
-<$deftag KBD /CLOSE /WHTSPC [__attrs]>
-<$deftag LABEL /CLOSE /NAW="button" [__attrs] FOR:string [__AccessKey] >
-<$deftag LEGEND /CLOSE /MBI="fieldset" /NAW=(__elem-inline) [__attrs] [__AccessKey] ALIGN:enum("top|bottom|left|right")>
-<$deftag LI /AUTOCLOSE /MBI="ul|ol|dir|menu" [__attrs] VALUE:string SKIP:string/O DINGBAT:string/O TYPE:string/J>
-<$deftag LINK /EMPTY /MBI="head" [__attrs] CHARSET:string HREF:uri/x HREFLANG:string TYPE:string REL:string REV:string MEDIA:string URN:string/JERK METHODS:string/JERK>
-<$deftag MAP /CLOSE [__attrs] NAME:id>
-<$deftag META /EMPTY /MBI="head"  HTTP-EQUIV:string NAME:string CONTENT:string/R SCHEME:string>
-<$deftag NOSCRIPT /CLOSE /NAW=(__elem-inline) [__attrs]>
-<$deftag OBJECT /CLOSE /NAW="pre" [__attrs] DECLARE:bool CLASSID:uri CODEBASE:uri DATA:uri TYPE:string CODETYPE:string ARCHIVE:string STANDBY:string HEIGHT:string WIDTH:string USEMAP:uri NAME:string [__IAlign] BORDER:num HSPACE:num VSPACE:num>
-<$deftag OPTGROUP /CLOSE /MBI="select" [__attrs] DISABLED:bool LABEL:string>
-<$deftag OPTION /AUTOCLOSE /MBI="select|optgroup" [__attrs] SELECTED:bool DISABLED:bool VALUE:string LABEL:string>
-<$deftag P /AUTOCLOSE /MBI=("address|blockquote|body|button|center|del|dd|div|fieldset|form|iframe|ins|li|map|noframes|noscript|object|td|th") /NAW=(__elem-inline) [__attrs] NOWRAP:bool/O [__Align]>
-<$deftag PARAM /EMPTY /MBI=("object") NAME:string VALUE:string VALUETYPE:enum("data|ref|object") id:id TYPE:string>
-<$deftag PRE /CLOSE /NAW=(__elem-inline) [__attrs] WIDTH:num>
-<$deftag Q /CLOSE /WHTSPC [__attrs] CITE:uri>
-<$deftag SAMP /CLOSE /WHTSPC [__attrs]>
-<$deftag SCRIPT /CLOSE /NAW="select|script" CHARSET:string TYPE:string/R LANGUAGE:string/O SRC:uri DEFER:bool EVENT:string FOR:uri>
-<$deftag SELECT /CLOSE /MBI="form" /NAW="button" [__attrs] NAME:string/r SIZE:num MULTIPLE:bool ROWS:string/O COLS:string/O DISABLED:bool ERROR:string/O WIDTH:string/O HEIGHT:string/O UNITS:string/O >
-<$deftag SMALL /CLOSE /NAW="pre" /WHTSPC [__attrs]>
-<$deftag SPAN /CLOSE [__attrs]>
-<$deftag STRONG /CLOSE /WHTSPC [__attrs]>
-<$deftag STYLE /CLOSE /MBI="head"  TYPE:string/R MEDIA:string TITLE:string>
-<$deftag SUB /CLOSE /NAW="pre" /WHTSPC [__attrs]>
-<$deftag SUP /CLOSE /NAW="pre" /WHTSPC [__attrs]>
-<$deftag TBODY /AUTOCLOSE /MBI="table" /NAW=(__elem-inline) [__attrs] [__HVAlign]>
-<$deftag TD /CLOSE /MBI="tr" /NAW=(__elem-inline) [__attrs] ABBR:string AXIS:string HEADERS:string SCOPE:enum("row|col|rowgroup|colgroup") ROWSPAN:string COLSPAN:string [__HVAlign] NOWRAP:bool NOFLOW:bool/O [__Background] [__WidthHeight]>
-<$deftag TEXTAREA /MBI="form" /CLOSE [__attrs] NAME:string ROWS:num/R COLS:num/R DISABLED:bool READONLY:bool [__AccessKey] WRAP:enum("off|soft|hard")/O>
-<$deftag TFOOT /AUTOCLOSE /MBI="table" /NAW=(__elem-inline) [__attrs] [__HVAlign]>
-<$deftag TH /CLOSE /MBI="tr" /NAW=(__elem-inline) [__attrs] [__Abbr] AXIS:string HEADERS:string SCOPE:enum("row|col|rowgroup|colgroup") ROWSPAN:string COLSPAN:string [__HVAlign] NOWRAP:bool NOFLOW:bool/O [__Background] [__WidthHeight]>
-<$deftag THEAD /AUTOCLOSE /MBI="table" /NAW=(__elem-inline) [__attrs] [__HVAlign]>
-<$deftag TR /CLOSE /MBI="table|thead|tbody|tfoot" /NAW=(__elem-inline) [__attrs] NOWRAP:bool/O [__HVAlign] DP:string/O [__Background]>
-<$deftag VAR /CLOSE /WHTSPC [__attrs]>
-
-  <$deftag BODY /AUTOCLOSE /RECOMMENDED /ONLYONCE [__attrs] BACKGROUND:uri [__BodyColors]>
-  <$deftag COLGROUP /AUTOCLOSE /MBI="table" [__attrs] [__ColumnAttrs]>
-  <$deftag HEAD /CLOSE /RECOMMENDED /ONLYONCE  PROFILE:uri>
-  <$deftag HTML /CLOSE /RECOMMENDED /ONLYONCE [__attrs] >
-  <$deftag IMG /EMPTY /NAW="pre" [__attrs] SRC:uri/X/Z/R ALT:string/R LONGDESC:uri NAME:string HEIGHT:string WIDTH:string USEMAP:uri ISMAP:bool/J [__IAlign] BORDER:num HSPACE:string VSPACE:string LOWSRC:uri/J>
-  <$deftag OL /CLOSE /NAW=(__elem-inline) [__attrs] TYPE:enum("1|a|i") START:num>
-  <$deftag TABLE /CLOSE [__attrs] WIDTH:string BORDER:num ALIGN:enum("left|center|right")/O [__TFrameRules] CELLSPACING:string CELLPADDING:string [__Background] UNITS:string/O NOWRAP:bool/J NOFLOW:bool/J>
-  <$deftag TITLE /CLOSE /RECOMMENDED /ONLYONCE /WHTSPC [__attrs]>
-  <$deftag UL /CLOSE /NAW=(__elem-inline) [__attrs] TYPE:enum("disc|square|circle") DINGBAT:string/O WRAP:string/O PLAIN:bool/O>
-
-  <* OBSOLETE tags as of HTML 4.01 *>
-  <$deftag HP0 /CLOSE /OBSOLETE /WHTSPC> <* highlight phrase *>
-  <$deftag HP1 /CLOSE /OBSOLETE /WHTSPC>
-  <$deftag HP2 /CLOSE /OBSOLETE /WHTSPC>
-  <$deftag HP3 /CLOSE /OBSOLETE /WHTSPC>
-  <$deftag LH /CLOSE /OBSOLETE [__attrs] >
-  <$deftag MENU /CLOSE /OBSOLETE [__attrs] COMPACT:bool>
-  <$deftag S /CLOSE /WHTSPC /OBSOLETE [__attrs]>
-  <$deftag U /CLOSE /WHTSPC /OBSOLETE [__attrs]>
-
-<* dubious/JERK tags or otherwise not found in HTML 4.01 *>
-  <$deftag AU /CLOSE /WHTSPC [__attrs] >
-  <$deftag BANNER /CLOSE [__attrs] >
-  <$deftag BQ /CLOSE [__attrs]  NOWRAP:bool>
-  <$deftag CREDIT /CLOSE /MBI="bq|fig" [__attrs] >
-  <$deftag EMBED /AUTOCLOSE /JERK SRC:uri HEIGHT:string WIDTH:string ATTRIBUTE_1:string ATTRIBUTE_2:string>
-  <$deftag FIG /CLOSE id:id class:string clear:enum("left|right|all|none") lang:string SRC:uri/x/z/r ALIGN:enum("left|right|center|justify|bleedleft|bleedright") NOFLOW:bool MD:string [__WidthHeight] UNITS:string IMAGEMAP:uri>
-  <$deftag FN /CLOSE [__attrs] >
-  <$deftag LANG /CLOSE /WHTSPC [__attrs] >
-  <$deftag NOTE /CLOSE id:id class:string clear:enum("left|right|all|none") lang:string md:string src:uri>
-  <$deftag OVERLAY SRC:uri/x/z/r MD:string UNITS:string X:string Y:string  WIDTH:string/j HEIGHT:string/j IMAGEMAP:uri>
-  <$deftag PERSON /CLOSE /WHTSPC [__attrs] >
-  <$deftag RANGE id:id class:string FROM:uri UNTIL:uri>
-  <$deftag WBR /JERK>
-
-
-<*
- * 16.2 Non-conforming features
- *
- * Elements in the following list are entirely obsolete, and must not be used by authors.
- *>
-
-<$deftag APPLET /CLOSE /OBSOLETE /JERK /NAW="pre" [__attrs] CODEBASE:uri ARCHIVE:string CODE:string OBJECT:string ALT:string NAME:id [__WidthHeight] HSPACE:num VSPACE:num [__IAlign]>
-<$deftag ACRONYM /CLOSE /OBSOLETE /WHTSPC [__attrs]>
-<$deftag BGSOUND /OBSOLETE /JERK [__attrs] SRC:uri LOOP:string>
-<$deftag DIR /CLOSE /OBSOLETE COMPACT:bool [__attrs]>
-<$deftag FRAME /OBSOLETE /EMPTY /MBI="frameset" [__attrs] LONGDESC:uri NAME:string SRC:uri FRAMEBORDER:enum("1|0") MARGINWIDTH:num MARGINHEIGHT:num NORESIZE:bool SCROLLING:enum("yes|no|auto")>
-<$deftag FRAMESET /CLOSE /OBSOLETE [__attrs] ROWS:string COLS:string BORDER:string/J FRAMEBORDER:num/J FRAMESPACING:num/J>
-<$deftag NOFRAMES /CLOSE /OBSOLETE [__attrs]>
-<$deftag ISINDEX /EMPTY /OBSOLETE [__attrs]  PROMPT:string>
-<$deftag KEYGEN /OBSOLETE [__attrs]>
-<$deftag LISTING /CLOSE /OBSOLETE [__attrs]>
-<$deftag MENUITEM /OBSOLETE [__attrs]>
-<$deftag NEXTID N:string /OBSOLETE [__attrs]>
-<$deftag NOEMBED /CLOSE /OBSOLETE /JERK>
-<$deftag PLAINTEXT /CLOSE /OBSOLETE>
-<$deftag RB /OBSOLETE>
-<$deftag RTC /OBSOLETE>
-<$deftag STRIKE /CLOSE /WHTSPC /OBSOLETE [__attrs]>
-<$deftag XMP /CLOSE /OBSOLETE>
-<$deftag BASEFONT /OBSOLETE /JERK /EMPTY /NAW="pre" id:id SIZE:enum("1|2|3|4|5|6|7") COLOR:color/O FACE:string>
-<$deftag BIG /CLOSE /OBSOLETE /NAW="pre" /WHTSPC [__attrs]>
-<$deftag BLINK /CLOSE /OBSOLETE /JERK>
-<$deftag CENTER /CLOSE /OBSOLETE [__attrs]>
-<$deftag FONT /JERK /CLOSE /NAW="pre" [__attrs]  SIZE:enum("1|2|3|4|5|6|7|+1|+2|+3|+4|+5|+6|+7|-1|-2|-3|-4|-5|-6|-7") COLOR:color FACE:string>
-<$deftag marquee /OBSOLETE [__attrs] behavior:enum("scroll|slide|alternate") direction:enum("left|right|up|down") truespeed:BOOL>
-<$deftag MULTICOL /CLOSE /JERK COLS:string GUTTER:string WIDTH:string>
-<$deftag NOBR /CLOSE /JERK>
-<$deftag SPACER /JERK TYPE:enum("vertical|horizontal|block") SIZE:string [__WidthHeight] ALIGN:enum("top|bottom|middle|left|right|texttop|absmiddle|baseline|absbottom")>
-<$deftag TT /CLOSE /WHTSPC [__attrs]>
-
-
-<* vi: set nowrap tw=0 et ts=2: *>
-<* EOF *>
-
+<$deftag ! /special>
+<$deftag a /close /whtspc [__attrs] [__hyperlink] hreflang:string type:string>
+<$deftag abbr /close /whtspc [__attrs]>
+<$deftag address /close [__attrs]>
+<$deftag area /mbi="map" /empty [__attrs] [__hyperlink] alt:string/r coords:string shape:enum("rect|circle|poly|default")> <* 4.8.14 alt is required iff href is set *>
+<$deftag article /close [__attrs]>
+<$deftag aside /close [__attrs]>
+<$deftag audio /close [__attrs] [__media]>
+<$deftag b /close /whtspc [__attrs]>
+<$deftag base /mbi="head" /empty /onlyonce [__attrs] href:uri [__target]>
+<$deftag bdi /close [__attrs]>
+<$deftag bdo /close [__attrs]>
+<$deftag blockquote /close [__attrs] cite:uri>
+<$deftag body /autoclose /recommended /onlyonce /mbi="html" [__attrs] 
+	      onafterprint:string onbeforeprint:string onbeforeunload:string onhashchange:string onlanguagechange:string onmessage:string onmessageerror:string onoffline:string
+              ononline:string onpagehide:string onpageshow:string onpopstate:string onrejectionhandled:string onstorage:string onunhandledrejection:string onunload:string>
+<$deftag br /empty [__attrs]>
+<$deftag button /close [__attrs] name:id type:enum("button|submit|reset") value:string disabled:bool [__forform]>
+<$deftag canvas /close [__attrs] [__dimension]>
+<$deftag caption /autoclose /mbi="table" [__attrs]>
+<$deftag cite /close /whtspc [__attrs]>
+<$deftag code /close /whtspc [__attrs]>
+<$deftag col /empty /mbi="colgroup" [__attrs] span:num>
+<$deftag colgroup /empty /mbi="table" [__attrs] span:num>
+<$deftag data /close [__attrs] value:string>
+<$deftag datalist /close [__attrs]>
+<$deftag dd /autoclose /mbi="dl" [__attrs]>
+<$deftag del /close /whtspc [__attrs] [__insdel]>
+<$deftag details /close [__attrs] open:bool>
+<$deftag dfn /close /whtspc [__attrs]>
+<$deftag dialog /close [__attrs] open:bool>
+<$deftag div /close [__attrs]>
+<$deftag dl /close [__attrs]>
+<$deftag dt /autoclose /mbi="dl" [__attrs]>
+<$deftag em /close /whtspc [__attrs]>
+<$deftag embed /empty [__attrs] src:uri type:string [__dimension]> <* 4.8.6 can't do any attribute *>
+<$deftag fieldset /close [__attrs] disabled:bool form:string name:string>
+<$deftag figcaption /close /mbi="figure" [__attrs]>
+<$deftag figure /close [__attrs]>
+<$deftag footer /close [__attrs]>
+<$deftag form /close [__attrs] accept-charset:string action:uri autocomplete:enum("on|off") [__form] rel:string>
+<$deftag h1 /close [__attrs]>
+<$deftag h2 /close [__attrs]>
+<$deftag h3 /close [__attrs]>
+<$deftag h4 /close [__attrs]>
+<$deftag h5 /close [__attrs]>
+<$deftag h6 /close [__attrs]>
+<$deftag head /close /recommended /onlyonce /mbi="html" [__attrs]>
+<$deftag header /close [__attrs]>
+<$deftag hgroup /close [__attrs]>
+<$deftag hr /empty [__attrs]>
+<$deftag html /close /recommended /onlyonce [__attrs]>
+<$deftag i /close /whtspc [__attrs]>
+<$deftag iframe /close [__attrs] src:uri srcdoc:string name:string sandbox:string allow:string allowfullscreen:bool [__dimension] [__referrer] [__loading]>
+<$deftag img /empty [__attrs] src:uri/stripext/getsize/required alt:string/required srcset:string sizes:string [__crossorigin] usemap:string ismap:bool
+              [__dimension] [__referrer] decoding:enum("sync|async|auto") [__loading]>
+<$deftag input /empty [__attrs] accept:sring alt:string autocomplete:string checked:bool dirname:string disabled:bool [__forform] [__dimension] list:string max:string min:string
+              maxlength:num minlength:num multiple:bool name:id pattern:string placeholder:string readonly:bool required:bool size:num src:uri step:string
+	      type:enum("hidden|text|search|tel|url|email|password|date|month|week|time|datetime-local|number|range|color|checkbox|radio|file|submit|image|reset|button") value:string>
+<$deftag ins /close /whtspc [__attrs] [__insdel]>
+<$deftag kbd /close /whtspc [__attrs]>
+<$deftag label /close [__attrs] for:string>
+<$deftag legend /close /mbi="fieldset" [__attrs]>
+<$deftag li /autoclose /mbi="ul|ol|menu" [__attrs] value:num>
+<$deftag link /empty [__attrs] href:uri hreflang:string [__crossorigin] rel:string media:string integrity:string type:string [__referrer] sizes:string imagesrcset:string imagesizes:string
+              as:string color:color disabled:bool>
+<$deftag main /close [__attrs]>
+<$deftag map /close [__attrs] name:id>
+<$deftag mark /close [__attrs]>
+<$deftag menu /close [__attrs]>
+<$deftag meta /empty /mbi="head" [__attrs] name:string http-equiv:enum("content-type|default-style|refresh|x-ua-compatible|content-security-policy") content:string charset:string>
+<$deftag meter /close [__attrs] value:string min:string max:string low:string high:string optimum:string>
+<$deftag nag /close [__attrs]>
+<$deftag noscript /close [__attrs]>
+<$deftag object /close [__attrs] data:uri type:string name:string usemap:string form:string [__dimension]>
+<$deftag ol /close [__attrs] reversed:bool start:num type:enum("1|a|A|i|I")>
+<$deftag optgroup /close /mbi="select" [__attrs] disabled:bool label:string>
+<$deftag option /autoclose /mbi="select|datalist|optgroup" [__attrs] disabled:bool selected:bool label:string value:string>
+<$deftag output /close [__attrs] for:string form:string name:string>
+<$deftag p /autoclose [__attrs]>
+<$deftag param /empty /mbi="object" name:string value:string>
+<$deftag picture /close [__attrs]>
+<$deftag pre /close [__attrs]>
+<$deftag progress /close value:string max:string>
+<$deftag q /close /whtspc [__attrs] cite:uri>
+<$deftag rp /autoclose /mbi="ruby" [__attrs]>
+<$deftag rt /autoclose /mbi="ruby" [__attrs]>
+<$deftag ruby /close [__attrs]>
+<$deftag s /close /whtspc [__attrs]>
+<$deftag samp /close [__attrs]>
+<$deftag script /close [__attrs] src:uri type:string nomodule:bool async:bool defer:bool [__crossorigin] integrity:string [__referrer]>
+<$deftag section /close [__attrs]>
+<$deftag select /close autocomplete:string disabled:bool form:string multiple:bool name:id required:bool size:num>
+<$deftag slot /close [__attrs] name:string>
+<$deftag small /whtspc /close [__attrs]>
+<$deftag source /empty [__attrs] src:uri/required type:string srcset:string sizes:string media:string>
+<$deftag span /close [__attrs]>
+<$deftag strong /close /whtspc [__attrs]>
+<$deftag style /close /mbi="head" [__attrs] media:string>
+<$deftag sub /close /whtspc [__attrs]>
+<$deftag summary /close /mbi="details" [__attrs]>
+<$deftag sup /close /whtspc [__attrs]>
+<$deftag table /close [__attrs]>
+<$deftag tbody /autoclose /mbi="table" [__attrs]>
+<$deftag td /close /mbi="tr" [__attrs] colspan:num rowspan:num headers:string>
+<$deftag template /close [__attrs]>
+<$deftag textarea /close [__attrs] autocomplete:string cols:num dirname:string disabled:bool form:string maxlength:num minlength:num name:string placeholder:string
+            readonly:bool required:bool rows:num wrap:enum("soft|hard")>
+<$deftag tfoot /autoclose /mbi="table" [__attrs]>
+<$deftag th /close /mbi="tr" [__attrs]>
+<$deftag thead /autoclose /mbi="table" [__attrs]>
+<$deftag time /close [__attrs] datetime:string>
+<$deftag title /close /recommended /onlyonce /whtspc [__attrs]>
+<$deftag tr /close /mbi="table|thead|tbody|tfoot" [__attrs]>
+<$deftag track /empty /mbi="audio|video" [__attrs] kind:enum("subtitles|captions|descriptions|chapters|metadata") src:uri srclang:string label:string default:bool>
+<$deftag u /close /whtspc [__attrs]>
+<$deftag ul /close [__attrs]>
+<$deftag var /close /whtspc [__attrs]>
+<$deftag video /close [__attrs] [__media] poster:uri playinline:bool [__dimension]>
+<$deftag wbr /empty [__attrs]>
