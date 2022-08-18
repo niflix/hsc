@@ -1,6 +1,6 @@
 # Process this file with autoconf to produce a configure script.
 
-AC_INIT(hsc, 1.0, matthias.bethke@gmx.net)
+AC_INIT([hsc], m4_normalize(m4_include([VERSION])))
 AC_PREREQ(2.57)
 AC_CONFIG_SRCDIR([src/ubiqx/sys_include.h])
 AC_CONFIG_HEADER([src/config.h])
