@@ -24,7 +24,7 @@ DELETE	= rm -f
 DELETEALL= rm -Rf
 INSTALL	= install
 
-.PHONY: all hsc docs clean distclean sterile depend install
+.PHONY: all hsc docs clean distclean depend install
 
 all: hsc docs
 
@@ -55,10 +55,8 @@ clean:
 
 distclean:
 	make -C src distclean
-	make -C docs-source sterile
+	make -C docs-source distclean
 	$(DELETEALL) src/Makefile docs-source/Makefile Makefile config.log config.status autom4te.cache src/config.h
-
-sterile: distclean
 
 depend: 
 	make -C src depend

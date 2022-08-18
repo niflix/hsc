@@ -49,7 +49,7 @@ HSCDEPP = hscdepp
 HSCPITT = hscpitt
 DELALL	= rm -Rf
 
-.PHONY: all all_hsc clean sterile distclean depend rebuild
+.PHONY: all all_hsc clean distclean depend rebuild
 
 #
 # rule to update whole docs
@@ -59,7 +59,6 @@ all : dirs images css all_hsc
 clean:
 	$(DELALL) $(DESTDIR)/*
 
-sterile: distclean
 distclean: clean
 	$(DELALL) Makefile Makefile.bak
 
