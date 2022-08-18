@@ -79,11 +79,11 @@ ifdef PS
 	@$(HSC) inc/ps.hsc   $(HSCFLAGS) to=$(DESTDIR) $<
 else
 ifdef VERBOSE
-	$(HSC) inc/html.hsc $(HSCFLAGS) to=$(DESTDIR) prjfile=$(PRJFILE) $<
+	$(HSC) inc/html.hsc $(HSCFLAGS) to=$(DESTDIR) prjfile=$(DESTDIR)/$(PRJFILE) $<
 	chmod ugo+r $<
 else
 	@echo $@
-	@$(HSC) inc/html.hsc $(HSCFLAGS) to=$(DESTDIR) prjfile=$(PRJFILE) $<
+	@$(HSC) inc/html.hsc $(HSCFLAGS) to=$(DESTDIR) prjfile=$(DESTDIR)/$(PRJFILE) $<
 	@chmod ugo+r $<
 endif
 endif
@@ -93,7 +93,7 @@ endif
 # update dependencies
 #
 depend :
-	$(HSCDEPP) file=Makefile prjfile=$(PRJFILE) verbose
+	$(HSCDEPP) file=Makefile prjfile=$(DESTDIR)/$(PRJFILE) verbose
 
 #
 # rebuild all documents
@@ -117,6 +117,7 @@ ps :
 # Create all destination directories
 dirs:
 	for d in `find * -type d`; do test -d $(DESTDIR)$$d || mkdir $(DESTDIR)$$d; done
+	cp -a $(PRJFILE) $(DESTDIR)/$(PRJFILE)
 
 # Copy images over to destination if required
 IMAGES=$(addprefix $(DESTDIR), $(wildcard image/*))
