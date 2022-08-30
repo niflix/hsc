@@ -36,6 +36,7 @@ docs:
 install:
 	make -C src install
 	$(INSTALL) -m 644 hsc.prefs $(datadir)/hsc.prefs
+	$(INSTALL) -m 644 hsc_html4.prefs $(datadir)/hsc_html4.prefs
 	$(INSTALL) -m 644 -D README $(docdir)/README
 	$(INSTALL) -m 644 -D CHANGES $(docdir)/CHANGES
 	cp -R docs $(docdir)/

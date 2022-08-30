@@ -38,7 +38,7 @@ DESTDIR = $(PARENT)docs/
 IGNORE  = ign="46|51"
 PRJFILE = hsc.project
 STDINC  = inc/macro.hsc inc/webpage.hsc inc/menus.hsc
-HSCMISC	= rplcent getsize compact msgmode=pedantic prefsfile=$(PARENT)hsc.prefs \
+HSCMISC	= rplcent getsize compact msgmode=pedantic prefsfile=$(PARENT)hsc_html4.prefs \
 	  quotestyle=double maxmsg=0 maxerr=0 lowercasetags \
 	  DEF PROJECT_STYLEFILE:string=":hscdoc.css"
 
