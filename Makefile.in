@@ -19,6 +19,7 @@
 
 prefix=@prefix@
 docdir=@datadir@/doc/hsc/
+datarootdir=@datarootdir@
 datadir=@datadir@
 DELETE	= rm -f
 DELETEALL= rm -Rf
