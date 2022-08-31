@@ -22,11 +22,12 @@ prefix=@prefix@
 exec_prefix=@exec_prefix@
 BINDIR=@bindir@
 datarootdir=@datarootdir@
-DATADIR=@datadir@
+pkgdatadir=@datadir@/@PACKAGE_NAME@
+sysconfdir=@sysconfdir@
 
 .PHONY: all clean all_clean distclean sterile depend ckx rex
 
-CFLAGS	= @CFLAGS@ -D@SYSTEM@ -I.
+CFLAGS	= @CFLAGS@ -D@SYSTEM@ -DCONFIG_PATH='"$(sysconfdir)/", "$(pkgdatadir)/"' -I. 
 COMP	= @CC@ -o $@ $(CFLAGS)
 LINK	= @CC@ -o $@ $(CFLAGS)
 LINKLIBS= @LINKLIBS@

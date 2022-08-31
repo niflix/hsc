@@ -54,7 +54,10 @@
 
 #elif (defined NEXTSTEP) || (defined UNIX) || (defined BEOS) || (defined WINNT)
 #define CONFIG_FILE "hsc.prefs"
+#ifndef CONFIG_PATH
+/* fallback to legacy definition if CONFIG_PATH is NOT set via CFLAGS */
 #define CONFIG_PATH "/usr/local/lib/hsc/", "/usr/lib/hsc/"
+#endif
 #define OPTION_FILE "hsc.options"
 
 /* [3] */
