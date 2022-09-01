@@ -1,6 +1,5 @@
 # Makefile for HSC ("HTML Sucks Completely")
-#
-# Copyright (C) 2001-2004 Matthias Bethke
+# Copyright (C) 2004 Matthias Bethke, 2022 Ralf Herrmann
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,40 +14,33 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-#
-# $Id: Makefile.in,v 1.1 2006/03/16 13:24:58 mb Exp mb $
 
-prefix=@prefix@
-exec_prefix=@exec_prefix@
-BINDIR=@bindir@
-datarootdir=@datarootdir@
-pkgdatadir=@datadir@/@PACKAGE_NAME@
-sysconfdir=@sysconfdir@
 
-.PHONY: all clean all_clean distclean sterile depend ckx rex
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+bindir = @bindir@
+datarootdir = @datarootdir@
+pkgdatadir = @datadir@/@PACKAGE_NAME@
+sysconfdir = @sysconfdir@
 
-CFLAGS	= @CFLAGS@ -D@SYSTEM@ -DCONFIG_PATH='"$(sysconfdir)/", "$(pkgdatadir)/"' -I. 
-COMP	= @CC@ -o $@ $(CFLAGS)
-LINK	= @CC@ -o $@ $(CFLAGS)
-LINKLIBS= @LINKLIBS@
-MOVE	= mv
-COPY	= cp
-DELETE	= rm -f
-INSTALL	= install
+CPPFLAGS = -D@SYSTEM@ -DCONFIG_PATH='"$(sysconfdir)/", "$(pkgdatadir)/"'
+CFLAGS = -I. -MD -MP @CFLAGS@
+LDFLAGS = $(CFLAGS)
+LD = @CC@
+CC = @CC@
+SHELL = /bin/sh
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = $(INSTALL)
+INSTALL_DATA = $(INSTALL) -m 644
 
-PROJECT_DIRS = amiga hsc hsclib hscprj hsctools riscos ugly regex ubiqx
-#
-# symbols for objects and executables
-#
-OBJ_TOOLS	= ugly/umemory.o ugly/ustring.o ugly/unikot.o ugly/expstr.o \
+OBJ_TOOLS =	ugly/umemory.o ugly/ustring.o ugly/unikot.o ugly/expstr.o \
 		ugly/fname.o ugly/dllist.o ugly/ufile.o ugly/uargs.o \
 		ugly/ustrlist.o ugly/infile.o ugly/prginfo.o \
 		hscprj/document.o hscprj/license.o hscprj/project.o \
 		hscprj/readprj.o hscprj/writeprj.o
-
-OBJ_REGEX	= regex/regex.o
-OBJ_UBIQX	= ubiqx/ubi_BinTree.o ubiqx/ubi_SplayTree.o
-OBJ_HSC		= $(OBJ_REGEX) $(OBJ_UBIQX) $(OBJ_TOOLS) \
+OBJ_REGEX =	regex/regex.o
+OBJ_UBIQX =	ubiqx/ubi_BinTree.o ubiqx/ubi_SplayTree.o
+OBJ_HSC =	$(OBJ_TOOLS) $(OBJ_REGEX) $(OBJ_UBIQX) \
 		hsclib/lmessage.o hsclib/entity.o hsclib/tag.o hsclib/attrib.o \
 		hsclib/idref.o hsclib/hscprc.o hsclib/lstatus.o hsclib/input.o \
 		hsclib/skip.o hsclib/uri.o hsclib/eval.o hsclib/posteval.o \
@@ -58,67 +50,40 @@ OBJ_HSC		= $(OBJ_REGEX) $(OBJ_UBIQX) $(OBJ_TOOLS) \
 		hsclib/tag_macro.o hsclib/tcpip.o ugly/hsctrees.o \
 		hsc/global.o hsc/status.o hsc/callback.o hsc/args.o \
 		hsc/output.o hsc/hsc.o
-OBJ_DEPP	= hsctools/hscdepp.o
-OBJ_PITT	= hsctools/hscpitt.o
-OBJ_ALL		= $(OBJ_HSC)
-EXE_ALL		= hsc/hsc hsctools/hscdepp hsctools/hscpitt
+OBJ_DEPP =	$(OBJ_TOOLS) hsctools/hscdepp.o
+OBJ_PITT =	$(OBJ_TOOLS) hsctools/hscpitt.o
+OBJ_ALL =	$(OBJ_HSC) hsctools/hscdepp.o hsctools/hscpitt.o
+EXE_ALL =	hsc/hsc hsctools/hscdepp hsctools/hscpitt
 
-#
-# compile all tools
-#
-all : rex $(EXE_ALL)
+.PHONY: all clean distclean install install-strip installdirs
 
-# implict rule for object-files
-# (old-style implicit rule)
-%.o : %.c
-	$(COMP) -c $<
+all: $(EXE_ALL)
 
 hsc/hsc : $(OBJ_HSC)
-	$(LINK) $(OBJ_HSC) $(LINKLIBS)
+	$(LD) -o $@ $(LDFLAGS) $^
 
-hsctools/hscdepp : $(OBJ_TOOLS) $(OBJ_DEPP)
-	$(LINK) $(OBJ_DEPP) $(OBJ_TOOLS) $(LINKLIBS)
+hsctools/hscdepp: $(OBJ_DEPP)
+	$(LD) -o $@ $(LDFLAGS) $^
 
-hsctools/hscpitt : $(OBJ_TOOLS) $(OBJ_PITT)
-	$(LINK) $(OBJ_PITT) $(OBJ_TOOLS) $(LINKLIBS)
+hsctools/hscpitt: $(OBJ_PITT)
+	$(LD) -o $@ $(LDFLAGS) $^
 
-rex:
-	make -C regex
-
-#--------------------------------------------------------------------
-# installation
-#--------------------------------------------------------------------
-install : all
-	strip $(EXE_ALL)
-	$(INSTALL) -Ds hsc/hsc $(BINDIR)/hsc
-	$(INSTALL) -Ds hsctools/hscdepp $(BINDIR)/hscdepp
-	$(INSTALL) -Ds hsctools/hscpitt $(BINDIR)/hscpitt
-
-#--------------------------------------------------------------------
-# cleanup - remove all objects and executables
-#--------------------------------------------------------------------
 clean :
 	make -C regex clean
-	$(DELETE) $(EXE_ALL)
-	$(DELETE) $(foreach d,$(PROJECT_DIRS),$(wildcard $(d)/*.o))
+	rm -f $(EXE_ALL)
+	rm -f $(OBJ_ALL)
+	rm -f $(patsubst %.o, %.d, $(OBJ_ALL))
 
-sterile: distclean
 distclean: clean
-	make -C regex distclean
-	$(DELETE) tags $(foreach d,$(PROJECT_DIRS),$d/tags)
-	$(DELETE) .nautilus-metafile.xml .thumbs .xvpics $(foreach d,$(PROJECT_DIRS),$d/{.nautilus-metafile.xml,.thumbnails,.xvpics})
+	$(MAKE) -C regex distclean
 
-#--------------------------------------------------------------------
-# update dependencies
-#--------------------------------------------------------------------
-DEP=.deps
-depend:
-	$(DELETE) $(DEP)
-	for d in $(PROJECT_DIRS); do \
-		for f in `ls $$d/*.c`; do \
-			gcc -D@SYSTEM@ -I. -MM "$$f" | \
-			sed -e "s/^\w\+\.o:/$$d\/&/" >>$(DEP); \
-		done; \
-	done
+installdirs:
+	$(INSTALL_PROGRAM) -d $(DESTDIR)/$(bindir)
 
-include $(DEP)
+install : all installdirs
+	$(INSTALL_PROGRAM) $(EXE_ALL) $(DESTDIR)/$(bindir)/
+
+install-strip: all installdirs
+	$(INSTALL_PROGRAM) -s $(EXE_ALL) $(DESTDIR)/$(bindir)/
+
+-include $(OBJ_ALL:%.o=%.d)
