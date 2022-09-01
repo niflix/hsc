@@ -1,10 +1,10 @@
-<HTML><HEAD><TITLE>Test Image sizes</TITLE></HEAD><BODY>
+<html><head><title>Test Image sizes</title></head><body>
 
-<IMG SRC="test.gif" ALT="test" WIDTH="320" HEIGHT="256">
-<IMG SRC="test.png" ALT="test" WIDTH="320" HEIGHT="256">
-<IMG SRC="test.jfif" ALT="test" WIDTH="320" HEIGHT="256">
+<img src="test.gif" alt="test" width="320" height="256">
+<img src="test.png" alt="test" width="320" height="256">
+<img src="test.jfif" alt="test" width="320" height="256">
 
-<IMG SRC="test_eof.gif" ALT="test" WIDTH="56" HEIGHT="46">
+<img src="test_eof.gif" alt="test" width="56" height="46">
 
-<IMG SRC="test.ilbm" ALT="test"> 
-</BODY></HTML>
+<img src="test.ilbm" alt="test"> 
+</body></html>

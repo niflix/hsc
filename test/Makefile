@@ -11,7 +11,7 @@ TESTS_SUCC=$(filter-out $(TESTS_FAIL), $(wildcard *.hsc))
 
 test : $(patsubst %.hsc, %.html, $(TESTS_SUCC)) $(patsubst %.hsc, %.msg, $(TESTS_FAIL))
 
-opt_getsize.html : HSC_ADD_ARGS := getsize
+opt_getsize.html : HSC_ADD_ARGS := getsize lct
 opt_rplcent.html : HSC_ADD_ARGS := rplcent
 optim_tag.html: HSC_ADD_ARGS := compact
 
