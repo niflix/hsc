@@ -166,7 +166,7 @@
 <$defent name="yuml"   rplc="ÿ" num="255">
 
 <$deftag ! /special>
-<$deftag a /close /whtspc [__attrs] [__hyperlink] hreflang:string type:string>
+<$deftag a /close /whtspc /naw="a" [__attrs] [__hyperlink] hreflang:string type:string>
 <$deftag abbr /close /whtspc [__attrs]>
 <$deftag address /close [__attrs]>
 <$deftag area /mbi="map" /empty [__attrs] [__hyperlink] alt:string/r coords:string shape:enum("rect|circle|poly|default")>
