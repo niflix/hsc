@@ -3,6 +3,6 @@ unknattr.hsc (5,20): Error 85: unknown attribute hugo for tag <SEPP>
 unknattr.hsc (5,29): Error 85: unknown attribute susi for tag <SEPP>
 unknattr.hsc (6,8): Warning 84: unknown attribute resi for tag <B>
 unknattr.hsc (6,13): Warning 84: unknown attribute hugo for tag <B>
-unknattr.hsc (7,21): Error 20: unknown attribute hugo
+unknattr.hsc (7,19): Error 20: unknown attribute hugo
 unknattr.hsc (8,21): Error 20: unknown attribute undefined-attr
 unknattr.hsc (8,29): Error 30: unmatched `>'
