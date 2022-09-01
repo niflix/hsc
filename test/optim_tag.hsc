@@ -23,7 +23,7 @@
 
 
 
-<A NAME="sepp">this is sepp</A>
+<A id="sepp">this is sepp</A>
 
 </BODY></HTML>
 
