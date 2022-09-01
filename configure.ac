@@ -50,7 +50,7 @@ CFLAGS="-Wall -pedantic"
 AC_ARG_ENABLE(debug,
 	      AS_HELP_STRING([--enable-debug],[Compile programs with GDB support and debugging output]),
 	      [CFLAGS="$CFLAGS -ggdb -g3 -DDEBUG"; REGEXDEBUG="regex/printchar.o"],
-	      CFLAGS="$CFLAGS -fomit-frame-pointer -Os")
+	      CFLAGS="$CFLAGS -fomit-frame-pointer -O2")
 AC_ARG_ENABLE(efence,
 	      AS_HELP_STRING([--enable-efence],[Link with efence library for memory debugging]),
 	      CFLAGS="$CFLAGS -lefence")
@@ -63,6 +63,7 @@ AC_ARG_ENABLE(diet,
 
 # Substitute variables
 AC_SUBST(CC)
+AC_SUBST(INSTALL)
 AC_SUBST(OBJEXT)
 AC_SUBST(SYSTEM)
 AC_SUBST(REGEXDEBUG)

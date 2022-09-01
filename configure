@@ -625,6 +625,7 @@ subdirs
 LINKLIBS
 REGEXDEBUG
 SYSTEM
+INSTALL
 target_os
 target_vendor
 target_cpu
@@ -4696,7 +4697,7 @@ CFLAGS="-Wall -pedantic"
 if test "${enable_debug+set}" = set; then :
   enableval=$enable_debug; CFLAGS="$CFLAGS -ggdb -g3 -DDEBUG"; REGEXDEBUG="regex/printchar.o"
 else
-  CFLAGS="$CFLAGS -fomit-frame-pointer -Os"
+  CFLAGS="$CFLAGS -fomit-frame-pointer -O2"
 fi
 
 # Check whether --enable-efence was given.
@@ -4716,6 +4717,7 @@ fi
 
 
 # Substitute variables
+
 
 
 
