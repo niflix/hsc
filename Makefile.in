@@ -1,6 +1,5 @@
 # Makefile for HSC ("HTML Sucks Completely")
-#
-# Copyright (C) 2001-2005 Matthias Bethke
+# Copyright (C) 2005 Matthias Bethke, 2022 Ralf Herrmann
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,52 +14,63 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-#
 
-prefix=@prefix@
-docdir=@datadir@/doc/hsc/
-datarootdir=@datarootdir@
-datadir=@datadir@
-pkgdatadir=@datadir@/@PACKAGE_NAME@
-DELETE	= rm -f
-DELETEALL= rm -Rf
-INSTALL	= install
 
-.PHONY: all hsc docs clean distclean depend install
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+bindir = @bindir@
+datarootdir = @datarootdir@
+pkgdatadir = @datadir@/@PACKAGE_NAME@
+pkgdocdir = @datadir@/doc/@PACKAGE_NAME@
 
-all: hsc docs
+SHELL = /bin/sh
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = $(INSTALL)
+INSTALL_DATA = $(INSTALL) -m 644
+FIND = find
+
+.PHONY: all clean distclean hsc 
+
+all: hsc doc
 
 hsc:
-	make -C src
-docs:
-	PATH="$(shell pwd)/src/hsc:$(PATH)" HSCEXTRAOPTS="IGNORE=21" make -C docs-source
+	$(MAKE) -C src
 
-install:
-	make -C src install
-	$(INSTALL) -m 644 -D hsc.prefs $(pkgdatadir)/hsc.prefs
-	$(INSTALL) -m 644 -D hsc_html4.prefs $(pkgdatadir)/hsc_html4.prefs
-	$(INSTALL) -m 644 -D README $(docdir)/README
-	$(INSTALL) -m 644 -D CHANGES $(docdir)/CHANGES
-	cp -R docs $(docdir)/
-	cp -R examples $(docdir)/
-	cp -R starter-project $(docdir)/
-	cp -R docs-source $(docdir)/examples/
-	find $(docdir)/docs -type d | xargs chmod 755
-	find $(docdir)/docs -type f | xargs chmod 644
-	find $(docdir)/examples -type d | xargs chmod 755
-	find $(docdir)/examples -type f | xargs chmod 644
-	find $(docdir)/starter-project -type d | xargs chmod 755
-	find $(docdir)/starter-project -type f | xargs chmod 644
+doc: hsc
+	$(MAKE) -C docs-source HSC=../src/hsc/hsc PARENT=../ HSCEXTRAOPTS="ignore=21"
 
 clean:
-	make -C src clean
-	$(DELETE) config.log config.status autom4te.cache/*
+	$(MAKE) -C src clean
+	$(MAKE) -C test clean
+	$(MAKE) -C docs-source clean
 
 distclean:
-	make -C src distclean
-	make -C docs-source distclean
-	$(DELETEALL) src/Makefile docs-source/Makefile Makefile config.log config.status autom4te.cache src/config.h
+	$(MAKE) -C src distclean
+	$(MAKE) -C test distclean
+	$(MAKE) -C docs-source distclean
+	rm -f -r autom4te.cache config.log config.status src/config.h
+	rm -f Makefile src/Makefile docs-source/Makefile
 
-depend: 
-	make -C src depend
+test check: hsc
+	$(MAKE) -C test test
+
+installdirs:
+	$(INSTALL) -d $(DESTDIR)$(pkgdatadir)
+	$(INSTALL) -d $(DESTDIR)$(pkgdocdir)
+
+install-doc: doc installdirs
+	$(INSTALL_DATA) README CHANGES $(DESTDIR)$(pkgdocdir)
+	cp -r examples $(DESTDIR)$(pkgdocdir)
+	cp -r docs-source $(DESTDIR)$(pkgdocdir)/examples
+	cp -r docs $(DESTDIR)$(pkgdocdir)
+	$(FIND) $(DESTDIR)$(pkgdocdir) -type f -exec chmod 644 {} ';' ;
+	$(FIND) $(DESTDIR)$(pkgdocdir) -type d -exec chmod 755 {} ';' ;
+
+install: all test installdirs install-doc
+	$(MAKE) -C src install
+	$(INSTALL_DATA) hsc.prefs hsc_html4.prefs $(DESTDIR)$(pkgdatadir)
+
+install-strip: all installdirs install-doc
+	$(MAKE) -C src install-strip
+	$(INSTALL_DATA) hsc.prefs hsc_html4.prefs $(DESTDIR)$(pkgdatadir)
 
